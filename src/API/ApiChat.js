@@ -1,7 +1,7 @@
 export async function layDanhSachLienLac(maSinhVien) {
   try {
     const response = await fetch(
-      `http://3.26.182.86/server-main/api/chatApp/chatApp.php?action=layDanhSachLienLac&maSinhVien=${maSinhVien}`,
+      `https://3.26.182.86/server-main/api/chatApp/chatApp.php?action=layDanhSachLienLac&maSinhVien=${maSinhVien}`,
       {
         method: "GET",
       }
@@ -19,7 +19,7 @@ export async function layNoiDungTinNhan(nguoiGui, nguoiNhan) {
   console.log(nguoiGui, nguoiNhan);
   try {
     const response = await fetch(
-      `http://localhost/server/api/chatApp/chatApp.php?action=getChat&nguoiGui=${nguoiGui}&nguoiNhan=${nguoiNhan}`,
+      `https://3.26.182.86/server-main/api/chatApp/chatApp.php?action=getChat&nguoiGui=${nguoiGui}&nguoiNhan=${nguoiNhan}`,
       {
         method: "GET",
       }
@@ -37,7 +37,7 @@ export async function layNoiDungTinNhan(nguoiGui, nguoiNhan) {
 export async function guiTinNhan({ nguoiGui, nguoiNhan, noiDung }) {
   try {
     const response = await fetch(
-      `http://localhost/server/api/chatApp/chatApp.php?action=sendChat`,
+      `https://3.26.182.86/server-main/api/chatApp/chatApp.php?action=sendChat`,
       {
         method: "POST",
         headers: {
@@ -62,7 +62,7 @@ export async function guiTinNhan({ nguoiGui, nguoiNhan, noiDung }) {
 export async function layDanhSachLienLacChoGiangVien(maGiangVien) {
   try {
     const response = await fetch(
-      `http://localhost/server/api/chatApp/chatApp.php?action=layDanhSachLienLacChoGiangVien&maGiangVien=${maGiangVien}`,
+      `https://3.26.182.86/server-main/api/chatApp/chatApp.php?action=layDanhSachLienLacChoGiangVien&maGiangVien=${maGiangVien}`,
       {
         method: "GET",
       }

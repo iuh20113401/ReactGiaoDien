@@ -1,6 +1,6 @@
 import fetchApi from "../FetchApi";
 const API_BASE_URL =
-  "http://3.26.182.86/server-main/api/giangVien/phanCongGiangVienPhanBien.php";
+  "https://3.26.182.86/server-main/api/giangVien/phanCongGiangVienPhanBien.php";
 
 // Function to fetch the list of assigned reviews
 export async function layDanhSachPhanCongPhanBien() {

@@ -1,6 +1,6 @@
 import fetchApi from "../FetchApi";
 
-const BASE_URL = "http://3.26.182.86/server-main/api/TaiKhoan/taiKhoan.php";
+const BASE_URL = "https://3.26.182.86/server-main/api/TaiKhoan/taiKhoan.php";
 
 // Function to get all taiKhoan
 export function layDanhSachTaiKhoan() {

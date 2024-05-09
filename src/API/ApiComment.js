@@ -1,4 +1,4 @@
-const BASE_URL = "http://3.26.182.86/server-main/api/comment/comment.php";
+const BASE_URL = "https://3.26.182.86/server-main/api/comment/comment.php";
 
 export async function layDanhSachComment(maDoAn) {
   try {

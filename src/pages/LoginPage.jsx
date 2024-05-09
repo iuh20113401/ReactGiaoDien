@@ -12,7 +12,7 @@ import { InputContainer } from "../ui/Input";
 import { Button, ButtonWithIcons } from "../ui/Button";
 import { dangNhap } from "../API/DangNhap";
 import { Spinner } from "../ui/Spinner";
-
+import Logo from "../../public/hinhanh/Mobile_login-rafiki.svg";
 const LoginCOntainer = styled.section`
   width: 100%;
   height: 100vh;
@@ -104,7 +104,7 @@ function LoginPage() {
   return (
     <LoginCOntainer>
       <ImageArticle>
-        <Image src="./src/assets/Mobile login-rafiki.svg" />
+        <Image src={Logo} />
       </ImageArticle>
       <LoginFormContainer>
         <Form method="post" onSubmit={handleSubmit(loginSubmit)}>
