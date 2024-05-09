@@ -1,7 +1,7 @@
 export async function layDanhSachLienLac(maSinhVien) {
   try {
     const response = await fetch(
-      `http://localhost/server/api/chatApp/chatApp.php?action=layDanhSachLienLac&maSinhVien=${maSinhVien}`,
+      `http://3.26.182.86/server-main/api/chatApp/chatApp.php?action=layDanhSachLienLac&maSinhVien=${maSinhVien}`,
       {
         method: "GET",
       }

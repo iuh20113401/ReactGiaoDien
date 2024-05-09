@@ -11,14 +11,19 @@ import Form from "../../../ui/Form";
 import { Danhsachdetai } from "../RightContent/Danhsachdetai";
 import { AttendanceQRCode } from "../../../utils/AttendanceQRCode";
 import { themMaDiemDanh } from "../../../API/giangVien/DeTai";
+import { DanhSachDoAn } from "../RightContent/DanhSachDoAn";
+import Loading from "../../../pages/Loading";
 
 export function ThemMaDiemDanh({ setActive }) {
   const { register, setValue, handleSubmit } = useForm();
   const [formData, setFormData] = useState({ loai: "", hinhThuc: "" });
   const [content, setContent] = useState(null);
 
-  const { mutate } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: themMaDiemDanh,
+    onMutate: () => {
+      setContent(<Loading size={8.4} color={"var(--color--main_7)"} />);
+    },
     onSuccess: (data) => {
       setContent(
         <div className="flex flexCenter g-center h-100">
@@ -59,13 +64,12 @@ export function ThemMaDiemDanh({ setActive }) {
         setContent(<Danhsachdetai register={register} />);
         break;
       case "da":
-        // Set different content if needed
+        setContent(<DanhSachDoAn register={register} />);
         break;
       default:
         setContent(null);
     }
   }, [formData.loai, register]);
-
   const handleInputChange = (field) => (event) => {
     setFormData((prev) => ({ ...prev, [field]: event.target.value }));
   };
@@ -80,6 +84,10 @@ export function ThemMaDiemDanh({ setActive }) {
       return;
     }
     const newData = { ...data, ...formData };
+    newData.selectedTopics = newData.selectedTopics.filter((item) =>
+      item === "all" ? false : true
+    );
+
     mutate(newData);
   };
 

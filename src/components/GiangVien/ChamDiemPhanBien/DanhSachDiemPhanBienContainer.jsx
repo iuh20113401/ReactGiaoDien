@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { HiPencil } from "react-icons/hi";
@@ -19,7 +19,12 @@ export function DanhSachDiemPhanBienContainer({
   return DanhSachSinhVien.sort((a, b) => a.MaDoAn - b.MaDoAn).map(
     (sv, index) => {
       return (
-        <ChiTietDoAn index={index} sv={sv} handleRowClick={handleRowClick} />
+        <ChiTietDoAn
+          key={sv.maSinhVien}
+          index={index}
+          sv={sv}
+          handleRowClick={handleRowClick}
+        />
       );
     }
   );
@@ -52,6 +57,16 @@ function ChiTietDoAn({ index, sv, handleRowClick }) {
     e.preventDefault();
     mutate({ loai: 1, thongTin: { maSinhVien, diem: isDiemPhanBien1 } });
   };
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setIsDiemPhanBien1(null);
+        setIsDiemPhanBien2(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
   const handleClick = (e) => {
     if (
       e.target.tagName === "BUTTON" ||

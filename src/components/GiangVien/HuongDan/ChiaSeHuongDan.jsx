@@ -21,8 +21,9 @@ export function ChiaSeHuongDan({ huongDan, setActive }) {
   const { mutate, isPending } = useMutation({
     mutationFn: (data) =>
       themHuongDanVaoDoAn({
+        loai: loai,
         maHuongDan: huongDan[0]?.maHuongDan,
-        maDeTai: data.ma,
+        selectedTopics: data.selectedTopics,
       }),
     onSuccess: () => {
       toast.success("Thêm hướng dẫn vào đề tài thành công");
@@ -33,6 +34,13 @@ export function ChiaSeHuongDan({ huongDan, setActive }) {
     },
   });
   function chiaSeHandler(data) {
+    if (data.selectedTopics.length === 0 || !data.selectedTopics) {
+      alert("Vui lòng chọn ít nhất 1 đề tài hoặc đồ án để chia sẻ hướng dẫn");
+      return;
+    }
+    data.selectedTopics = data.selectedTopics.filter((item) => {
+      return item === "all" ? false : true;
+    });
     mutate(data);
   }
   return (

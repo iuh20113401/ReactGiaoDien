@@ -1,16 +1,16 @@
 import fetchApi from "../FetchApi";
 
-const BASE_URL = "http://localhost/server/api/giangVien";
+const BASE_URL = "http://3.26.182.86/server-main/api/giangVien";
 
 export function layDanhSachDeTaiChoDuyet() {
-  const url = `${BASE_URL}/duyetDeTai.php?action=layDanhSachDeTaiChoDuyet`;
+  const url = `${BASE_URL}/duyetDeTai.php?resource=deTaiChoDuyet`;
   return fetchApi(url, { method: "GET" });
 }
 
 export function duyetDeTai(deTai) {
-  const url = `${BASE_URL}/duyetDeTai.php?action=duyetDeTai`;
+  const url = `${BASE_URL}/duyetDeTai.php?resource=duyetDeTai`;
   const options = {
-    method: "POST",
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(deTai),
   };
@@ -18,9 +18,9 @@ export function duyetDeTai(deTai) {
 }
 
 export function khongDuyetDeTai(deTai) {
-  const url = `${BASE_URL}/duyetDeTai.php?action=khongDuyetDeTai`;
+  const url = `${BASE_URL}/duyetDeTai.php?resource=khongDuyetDeTai`;
   const options = {
-    method: "POST",
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(deTai),
   };
@@ -28,9 +28,9 @@ export function khongDuyetDeTai(deTai) {
 }
 
 export function yeuCauChinhSuaDeTai(deTai) {
-  const url = `${BASE_URL}/deTai.php?action=suaDeTai`;
+  const url = `${BASE_URL}/deTai.php?resource=yeuCauChinhSuaDeTai`;
   const options = {
-    method: "POST",
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(deTai),
   };

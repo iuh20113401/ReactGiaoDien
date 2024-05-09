@@ -1,6 +1,6 @@
 // Base configuration for fetch requests
 import fetchApi from "../FetchApi";
-const BASE_URL = "http://localhost/server/api/sinhVien/deTai.php";
+const BASE_URL = "http://3.26.182.86/server-main/api/sinhVien/deTai.php";
 
 // Exported functions using the fetchData utility
 export function layDanhSachDeTai() {
@@ -38,11 +38,10 @@ export function layThongTinDiemDanh({ maDiemDanh, maSinhVien }) {
 }
 
 export function layHuongDanTheoSinhVien(thongtinsinhvien) {
-  const url = `${BASE_URL}?resource=huongDanTheoSinhVien`;
+  const url = `${BASE_URL}?resource=huongDanTheoSinhVien&maSinhVien=${thongtinsinhvien.maSinhVien}`;
   // const headers = { "Content-Type": "application/json" };
   return fetchApi(url, {
-    method: "POST",
-    body: JSON.stringify(thongtinsinhvien),
+    method: "GET",
   });
 }
 export function dangKyDeTai(thongTinDangKy) {

@@ -1,6 +1,6 @@
 import fetchApi from "../FetchApi";
 
-const BASE_URL = "http://localhost/server/api/giangVien/doAn.php";
+const BASE_URL = "http://3.26.182.86/server-main/api/giangVien/doAn.php";
 
 const callApi = async (
   action,
@@ -9,7 +9,7 @@ const callApi = async (
   maGiangVien = null,
   maDoAn = null
 ) => {
-  let url = `${BASE_URL}?action=${action}`;
+  let url = `${BASE_URL}?resource=${action}`;
   if (maGiangVien) url += `&maGiangVien=${maGiangVien}`;
   if (maDoAn) url += `&maDoAn=${maDoAn}`;
 
@@ -19,26 +19,26 @@ const callApi = async (
 };
 
 export const layDanhSachDiemQuaTrinh = (maGiangVien) =>
-  callApi("layDanhSachDiemQuaTrinh", "GET", null, maGiangVien);
+  callApi("diemQuaTrinh", "GET", null, maGiangVien);
 export const layDanhSachSinhVien = (maGiangVien) =>
-  callApi("layDanhSachSinhVien", "GET", null, maGiangVien);
+  callApi("sinhVien", "GET", null, maGiangVien);
 export const layDanhSachDoAn = (maGiangVien) =>
-  callApi("layDanhSachDoAn", "GET", null, maGiangVien);
+  callApi("doAn", "GET", null, maGiangVien);
 export const layThongTinDoAn = (maDoAn) =>
-  callApi("layThongTinDoAn", "GET", null, null, maDoAn);
+  callApi("thongTinDoAn", "GET", null, null, maDoAn);
 export const layThongTinThanhVien = (maDoAn) =>
-  callApi("layThongTinThanhVien", "GET", null, null, maDoAn);
+  callApi("thongTinThanhVien", "GET", null, null, maDoAn);
+export const layDanhSachPhanBien = (maGiangVien) =>
+  callApi("phanBien", "GET", null, maGiangVien);
+export const layDanhSachHuongDanChoDoAn = (maDoAn) =>
+  callApi("huongDanDoAn", "GET", null, null, maDoAn);
+export const duyetPhanBien = (data) =>
+  callApi("duyetPhanBien", "POST", data, null, null);
 export const chamDiemGiuaKy = (thongTinSinhVien) =>
   callApi("chamDiemGiuaKy", "POST", thongTinSinhVien);
 export const chamDiemCuoiKy = (thongTinSinhVien) =>
   callApi("chamDiemCuoiKy", "POST", thongTinSinhVien);
-export const layDanhSachPhanBien = (maGiangVien) =>
-  callApi("layDanhSachPhanBien", "GET", null, maGiangVien);
 export const chamDiemPhanBien1 = (thongTinSinhVien) =>
   callApi("chamDiemPhanBien1", "POST", thongTinSinhVien);
 export const chamDiemPhanBien2 = (thongTinSinhVien) =>
   callApi("chamDiemPhanBien2", "POST", thongTinSinhVien);
-export const layDanhSachHuongDanChoDoAn = (maDoAn) =>
-  callApi("layDanhSachHuongDanChoDoAn", "GET", null, null, maDoAn);
-export const duyetPhanBien = (data) =>
-  callApi("duyetPhanBien", "POST", data, null, null);

@@ -1,6 +1,6 @@
 import fetchApi from "../FetchApi";
 
-const BASE_URL = "http://localhost/server/api/giangVien/deTai.php";
+const BASE_URL = "http://3.26.182.86/server-main/api/giangVien/deTai.php";
 
 export async function layDanhSachDeTai(maGiangVien) {
   const url = `${BASE_URL}?resource=deTai&maGiangVien=${maGiangVien}`;

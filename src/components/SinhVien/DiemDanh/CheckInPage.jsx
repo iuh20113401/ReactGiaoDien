@@ -6,6 +6,7 @@ import { Spinner } from "../../../ui/Spinner";
 import toast from "react-hot-toast";
 
 export function CheckInPage({ data }) {
+  console.log(data);
   const [status, setStatus] = useState({
     status: "loading",
     message: "Đang xác minh vị trí...",

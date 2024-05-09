@@ -18,6 +18,11 @@ export function DanhSachDoAn({ register }) {
     queryFn: () => layDanhSachDoAn(thongTinNguoiDung.maGiangVien),
   });
   const [checkedItems, setCheckedItems] = useState([]);
+  const handleCheckboxAllChange = (e) => {
+    e.target.checked
+      ? setCheckedItems(danhSachDoAn.map((dt) => `${dt.maDoAn}`))
+      : setCheckedItems([]);
+  };
   const handleCheckboxChange = (value, isChecked) => {
     setCheckedItems((prev) => {
       const newCheckedItems = isChecked
@@ -36,7 +41,14 @@ export function DanhSachDoAn({ register }) {
     <Table>
       <TieuDe>
         <Col>
-          <InputContainer.Checkbox />
+          <InputContainer.Checkbox
+            checked={checkedItems.length === danhSachDoAn.length}
+            register={{
+              ...register("selectedTopics"),
+            }}
+            onChange={handleCheckboxAllChange}
+            value="all"
+          />
         </Col>
         <Col2 className="g-center">
           <P2 size="1.4" className="semibold" color="var(--color--secondary_8)">

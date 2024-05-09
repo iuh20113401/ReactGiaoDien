@@ -72,9 +72,7 @@ function HuongDan() {
       <HuongDanTitle>
         <H5>Hướng dẫn</H5>
       </HuongDanTitle>
-      {NoiDungHuongDan.length && (
-        <Loading size={8.4} color={"var(--color--main_7)"} />
-      )}
+      {isLoading && <Loading size={8.4} color={"var(--color--main_7)"} />}
       {!NoiDungHuongDan.length && (
         <NoiDungHuongDanContainer className="flex flexCenter">
           <img
