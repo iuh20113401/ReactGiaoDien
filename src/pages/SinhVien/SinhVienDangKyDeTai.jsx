@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
@@ -13,6 +13,7 @@ import { InputContainer } from "../../ui/Input";
 import { DangKyDeTaiGrid } from "./DangKyDeTaiGrid";
 import DanhSachDeTaiList from "./DangKyDeTaiList";
 import { layDanhSachDeTai } from "../../API/sinhVien/DeTai";
+import { HiX } from "react-icons/hi";
 const DangKyDeTaiSection = styled.section`
   display: flex;
   flex-direction: column;
@@ -22,6 +23,20 @@ const DangKyDeTaiSection = styled.section`
   min-height: 100%;
   position: relative;
   min-height: 100vh;
+  ${({ navactive }) =>
+    navactive === "true" &&
+    css`
+      &::before {
+        content: "";
+        position: absolute;
+        width: 101%;
+        height: 100%;
+        top: 0;
+        padding: 0;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 10;
+      }
+    `}
 `;
 const DangKyDeTaiContent = styled.article`
   display: flex;
@@ -49,6 +64,21 @@ const FilterAside = styled.aside`
   background-color: #fff;
   box-shadow: 0 0rem 1rem rgba(0, 0, 0, 0.1);
   border-radius: 0.6rem;
+  @media screen and (max-width: 768px) {
+    ${({ navactive }) =>
+      navactive === "true"
+        ? css`
+            display: block;
+            position: absolute;
+            width: 30%;
+            height: 100vh;
+            top: 0;
+            z-index: 10;
+          `
+        : css`
+            display: none;
+          `}
+  }
 `;
 const FilterDiv = styled.div`
   display: flex;
@@ -59,6 +89,21 @@ const FilterTitle = styled.p``;
 const DanhSachDeTai = styled.aside`
   width: 80%;
   height: 100%;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+`;
+const FilterToggle = styled.span`
+  display: none;
+  @media screen and (max-width: 768px) {
+    & {
+      display: block;
+      position: absolute;
+      right: 1rem;
+      cursor: pointer;
+      z-index: 11;
+    }
+  }
 `;
 
 function SinhVienDangKyDeTai() {
@@ -68,7 +113,7 @@ function SinhVienDangKyDeTai() {
   });
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedGiangVien, setSelectedGiangVien] = useState([]);
-
+  const [filterOpen, setFilterOpen] = useState(false);
   function handlingChange(field = "sortby", value) {
     searchParams.set(field, value);
     setSearchParams(searchParams);
@@ -118,14 +163,22 @@ function SinhVienDangKyDeTai() {
         ? acc
         : [...acc, { maDanhMuc: curr.danhMuc, tenDanhMuc: curr.tenDanhMuc }];
     }, []);
+  const toggleFilter = () => {
+    setFilterOpen(!filterOpen);
+  };
   return (
-    <DangKyDeTaiSection>
+    <DangKyDeTaiSection navactive={`${filterOpen}`}>
       <PageHeader>Danh sách đề tài</PageHeader>
       {!isLoading && (
         <DangKyDeTaiContent>
-          <FilterAside>
+          <FilterAside navactive={`${filterOpen}`}>
             <FilterDiv>
-              <FilterTitle>Sắp xếp</FilterTitle>
+              <div className="flex g-spaceBetween flexCenter">
+                <FilterTitle>Sắp xếp</FilterTitle>
+                <FilterToggle onClick={toggleFilter}>
+                  <HiX />
+                </FilterToggle>
+              </div>
               <ButtonWithIcons
                 bgcolor="var(--color--secondary_4)"
                 color="var(--color--secondary_11)"
@@ -218,7 +271,10 @@ function SinhVienDangKyDeTai() {
           </FilterAside>
           <DanhSachDeTai>
             {!isLoading && DanhSachDeTaiDangKy && (
-              <DanhSachDeTaiList danhSachDeTai={DanhSachDeTaiDangKy} />
+              <DanhSachDeTaiList
+                danhSachDeTai={DanhSachDeTaiDangKy}
+                onClick={toggleFilter}
+              />
             )}
             {isLoading && (
               <div className="flex flexCenter g-center">

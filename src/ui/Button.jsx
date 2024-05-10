@@ -44,6 +44,7 @@ const buttonState = {
 };
 const buttonStyles = css`
   align-items: center;
+  font-size: 1.4rem;
   padding: 1rem 2rem;
   height: fit-content;
   border-radius: ${({ round }) => (round ? "50rem" : "0.6rem")};

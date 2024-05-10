@@ -10,6 +10,7 @@ import {
 import { Spinner } from "../ui/Spinner";
 import Loading from "./Loading";
 import Logo from "../../public/hinhanh/iuh_logo_1.png";
+import { P2 } from "../ui/Typography";
 
 const Container = styled.div`
   display: flex;
@@ -159,6 +160,18 @@ const ChatApp = () => {
       setNguoiNhan(danhSachLienLac[0].ma);
     }
   }, [danhSachLienLac]);
+  if (!data?.length) {
+    return (
+      <Container>
+        <Main className="flex flexCenter g-center ">
+          <P2 size="2" className="bold">
+            {" "}
+            Chưa có liên hệ nào
+          </P2>
+        </Main>
+      </Container>
+    );
+  }
   return (
     <Container>
       <Main isloading={isLoading}>

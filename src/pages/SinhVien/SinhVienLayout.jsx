@@ -22,11 +22,6 @@ function SinhVienLayout() {
   }
   return (
     <SinhVienLayoutSection>
-      {isLoading && (
-        <div className="h-100 flex flexCenter g-center">
-          <Spinner color="var(--color--main_7)" />
-        </div>
-      )}
       {!isLoading && (
         <>
           <SinhVienNavigation />

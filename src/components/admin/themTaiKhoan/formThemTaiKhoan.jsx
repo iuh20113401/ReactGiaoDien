@@ -12,11 +12,12 @@ import {
   themSinhVien,
   themTaiKhoan,
 } from "../../../API/taiKhoan/TaiKhoan";
+import toast from "react-hot-toast";
 
 function FormThemTaiKhoan() {
   const [vaiTro, setVaiTro] = useState("");
   const { register, handleSubmit, reset } = useForm();
-  const { mutate, isPending } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: (data) => {
       data.vaiTro = vaiTro;
       if (+vaiTro === 0) {
@@ -29,10 +30,11 @@ function FormThemTaiKhoan() {
       themTaiKhoan(data);
     },
     onSuccess: () => {
-      alert("Thêm tài khoản thành công");
+      reset();
+      toast.success("Thêm tài khoản thành công");
     },
     onError: (error) => {
-      alert("Thêm tài khoản thất bại");
+      toast.error("Thêm tài khoản thất bại");
     },
   });
 
@@ -134,13 +136,14 @@ function FormThemTaiKhoan() {
         </InputContainer>
       )}
       <div className="flex g-8">
-        <OutlineButton color="var(--color--main_7)">
+        <OutlineButton color="var(--color--main_7)" onClick={reset}>
           Xóa toàn bộ ô nhập
         </OutlineButton>
         <Button
           type="submit"
           bgcolor="var(--color--main_7)"
           color="var(--color--secondary_1)"
+          disabled={isLoading}
         >
           Thêm tài khoản
         </Button>

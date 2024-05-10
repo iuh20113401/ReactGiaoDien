@@ -3,7 +3,7 @@ import styled, { css, keyframes } from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { HiSearch } from "react-icons/hi";
+import { HiFilter, HiSearch } from "react-icons/hi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { P2 } from "../../ui/Typography";
@@ -143,7 +143,21 @@ const FullScreenDiv = styled.div`
   z-index: 100;
 `;
 const ButtonGroup = styled.div``;
-function DanhSachDeTaiList({ danhSachDeTai }) {
+const FilterToggle = styled.span`
+  display: none;
+  @media screen and (max-width: 768px) {
+    & {
+      display: flex;
+      align-items: center;
+      background-color: var(--color--secondary_3);
+      width: 2rem;
+      height: 3.2rem;
+      cursor: pointer;
+      z-index: 11;
+    }
+  }
+`;
+function DanhSachDeTaiList({ danhSachDeTai, onClick }) {
   const [searchDeTai, setSearchDeTai] = useState("");
   const [deTaiDaLoc, setdeTaiDaLoc] = useState(danhSachDeTai);
 
@@ -163,23 +177,32 @@ function DanhSachDeTaiList({ danhSachDeTai }) {
       <DeTaiListContaienr className="flex flexColumn g-8 ">
         <div className="flex flexCenter g-spaceBetween">
           <P2>{danhSachDeTai.length} Đề tài</P2>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <InputContainer full="none" type="inputGroup">
-              <span>
-                <HiSearch />
-              </span>
-              <InputContainer.Input
-                type="text"
-                value={searchDeTai}
-                onChange={(e) => setSearchDeTai(e.target.value)}
-                placeholder="Nhập tên đề tài cần tìm"
-                id={"timKiem"}
-              />
-            </InputContainer>
-          </form>
+          <div className="flex flexCenter g-8">
+            <form onSubmit={(e) => e.preventDefault()}>
+              <InputContainer full="none" type="inputGroup">
+                <span>
+                  <HiSearch />
+                </span>
+                <InputContainer.Input
+                  type="text"
+                  value={searchDeTai}
+                  onChange={(e) => setSearchDeTai(e.target.value)}
+                  placeholder="Nhập tên đề tài cần tìm"
+                  id={"timKiem"}
+                />
+              </InputContainer>
+            </form>
+            <FilterToggle onClick={onClick}>
+              <HiFilter />
+            </FilterToggle>
+          </div>
         </div>
         <DeTaiList>
-          <DanhSachDoAnContainer danhSachDeTai={deTaiDaLoc} />
+          {danhSachDeTai.length ? (
+            <DanhSachDoAnContainer danhSachDeTai={deTaiDaLoc} />
+          ) : (
+            <P2>Không có đề tài nào</P2>
+          )}
         </DeTaiList>
       </DeTaiListContaienr>
     </>

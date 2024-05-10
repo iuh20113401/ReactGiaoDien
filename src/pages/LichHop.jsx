@@ -30,7 +30,6 @@ const Container = styled.article`
 
 const LichHop = () => {
   const { data } = UseThongTinTaiKhoan();
-  console.log(data);
   const vaiTro = data.vaiTro;
 
   const [active, setActive] = useState(false);

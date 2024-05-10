@@ -20,7 +20,7 @@ import {
 import UseThongTinTaiKhoan from "../../../hooks/UseThongTinTaiKhoan";
 import Loading from "../../../pages/Loading";
 import { useSearchParams } from "react-router-dom";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 const ThemDeTaiContainer = styled.section`
   display: flex;
   flex-direction: column;
@@ -87,7 +87,7 @@ function GiangVienThemDeTai() {
     };
     reset(defaultValues);
   }, [dt, reset]);
-  const { mutate: themMutate, isPending } = useMutation({
+  const { mutate: themMutate, isLoading: themLoading } = useMutation({
     mutationFn: themDeTai,
     onSuccess: (data) => {
       toast.success("Thêm thành công");
@@ -139,7 +139,7 @@ function GiangVienThemDeTai() {
       themMutate(formData);
     }
   }
-  const isLoading = isPending || danhMucLoading;
+  const isLoading = themLoading || danhMucLoading;
   return (
     <ThemDeTaiContainer>
       <H5 color="var(--color--secondary_7)">
@@ -291,7 +291,7 @@ function GiangVienThemDeTai() {
               <Button
                 bgcolor="var(--color--main_7)"
                 color="var(--color--secondary_1)"
-                disabled={suaLoading || isPending}
+                disabled={suaLoading || themLoading}
               >
                 {dt ? "Sửa đề tài" : "Thêm đề tài"}
               </Button>

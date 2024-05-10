@@ -105,6 +105,11 @@ html {
     font-size: 50%;
   }
 }
+@media screen and (max-width: 500px){
+  html {
+    font-size: 25%;
+  }
+}
 
 
 body {
