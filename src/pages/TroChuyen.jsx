@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-
+import Logo from "../public/hinhanh/iuh_logo_1.png";
 import {
   guiTinNhan,
   layDanhSachLienLac,
@@ -179,13 +179,7 @@ const ChatApp = () => {
                         onClick={() => setNguoiNhan(contact.ma)}
                         key={index}
                       >
-                        <Avatar
-                          src={
-                            contact.hinhanh ||
-                            "../public/hinhanh/iuh_logo_1.png"
-                          }
-                          alt="User 1"
-                        />
+                        <Avatar src={contact.hinhanh || Logo} alt="User 1" />
                         <span id={contact.id}>{contact.ten}</span>
                       </Contact>
                     )
