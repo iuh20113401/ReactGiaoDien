@@ -9,7 +9,7 @@ import { layDanhSachPhanBien } from "../../../API/giangVien/DoAn";
 import { XemChiTietDoAn } from "./XemChiTietDoAn";
 import { DanhSachDiemPhanBienContainer } from "./DanhSachDiemPhanBienContainer";
 import Loading from "../../../pages/Loading";
-
+import NothingHere from "../../../../public/hinhanh/Nothing_here_yet_1.webp";
 export const TagList = styled.div`
   width: 100%;
   height: auto;
@@ -39,7 +39,7 @@ export function ChamDiemPhanBienContainer() {
       {!isLoading && !DanhSachSinhVien.length && (
         <Container className="flex flexCenter">
           <img
-            src="../public/hinhanh/Nothing_here_yet_1.webp"
+            src={NothingHere}
             alt="Nothing here yet"
             width={"512rem"}
             height={"512rem"}

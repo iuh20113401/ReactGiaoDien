@@ -1,6 +1,7 @@
+import React from "react";
 import styled from "styled-components";
 import { P2 } from "../../ui/Typography";
-
+import LogoImage from "../../../public/hinhanh/Logo_IUH.png";
 const Footer = styled.div`
   padding: 2.4rem;
   display: flex;
@@ -28,7 +29,7 @@ function SinhVienFooter() {
   return (
     <Footer>
       <FooterLogoBox>
-        <Logo src="../Logo_IUH.png" alt="logo of iuh" />
+        <Logo src={LogoImage} alt="logo of iuh" />
       </FooterLogoBox>
       <FooterContent>
         {" "}

@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -87,7 +88,6 @@ function SinhVienDangKyDeTai() {
     if (!isLoading && data) {
       const direction = searchParams.get("sortby") === "tentangdan" ? 1 : -1;
       const filterDanhMuc = searchParams.get("danhmuc") || null;
-      console.log(selectedGiangVien);
       return data
         .filter((dt) => {
           if (selectedGiangVien.length === 0) return true;

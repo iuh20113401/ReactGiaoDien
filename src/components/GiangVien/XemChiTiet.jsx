@@ -1,3 +1,4 @@
+import React from "react";
 import ReactQuill from "react-quill";
 import styled, { keyframes } from "styled-components";
 import { HiX } from "react-icons/hi";

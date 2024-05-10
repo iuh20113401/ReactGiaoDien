@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 
@@ -10,6 +11,7 @@ import TaiLieu from "../../components/SinhVien/QuanLyDeTaiComponent/TaiLieu";
 import ThanhVien from "../../components/SinhVien/QuanLyDeTaiComponent/ThanhVien";
 import useThongTinDoAn from "../../hooks/sinhVien/useThongTinDoAn";
 import Logo from "../../../public/hinhanh/iuh_logo_2.png";
+import Loading from "../Loading";
 const QuanLyDeTaiSection = styled.section`
   display: flex;
   flex-direction: column;
@@ -74,65 +76,67 @@ const TabArr = [
 ];
 function SinhVienQuanLyDeTai() {
   const [isActive, setIsActive] = useState(0);
-  const { data, isLoading, error, isError } = useThongTinDoAn();
+  const { data, isLoading } = useThongTinDoAn();
   const DoAn = !isLoading && data.thongTinDoAn;
+  if (isLoading) return <Loading size={8.4} color={"var(--color--main_7)"} />;
   return (
     <QuanLyDeTaiSection>
-      {!isLoading && (
-        <>
-          <QuanLyTitle>
-            <TitleOverview>
-              <Figure>
-                <img
-                  src={Logo}
-                  width={"100%"}
-                  height={"100%"}
-                  alt="logo of iuh"
-                />
-              </Figure>
-              <TitleRight>
-                <TitleMain>
-                  <H4 color="var(--color--secondary_8)" className="semibold">
-                    {DoAn.tenDeTai}
-                  </H4>
-                </TitleMain>
-                <TitleSubtitle>
-                  <P2 color="var(--color--secondary_8)">
-                    Mã đồ án: <strong>{DoAn.maDoAn}</strong>
-                  </P2>
-                  <P2 color="var(--color--secondary_8)">
-                    Giảng viên hướng dẫn: <strong>{DoAn.giangVienHD}</strong>
-                  </P2>
-                  <P2 color="var(--color--secondary_8)">
-                    Ngày đăng ký:{" "}
-                    <strong>{new Date().toLocaleDateString()}</strong>
-                  </P2>
-                  <Badges
-                    shadow={true}
-                    color={"var(--color--secondary_1)"}
-                    bgcolor={"var(--color--main_6)"}
-                    label={"New"}
-                  />
-                  <Badges
-                    shadow={true}
-                    color={"var(--color--secondary_1)"}
-                    bgcolor={"var(--color--red_7)"}
-                    label={"Chờ xác nhận"}
-                  />
-                </TitleSubtitle>
-              </TitleRight>
-            </TitleOverview>
-            <TitileTab>
-              <TabHeaderContents
-                TabArr={TabArr}
-                isActive={isActive}
-                setIsActive={setIsActive}
+      <>
+        <QuanLyTitle>
+          <TitleOverview>
+            <Figure>
+              <img
+                src={Logo}
+                width={"100%"}
+                height={"100%"}
+                alt="logo of iuh"
               />
-            </TitileTab>
-          </QuanLyTitle>
-          <TabContentContents TabArr={TabArr} isActive={isActive} />
-        </>
-      )}
+            </Figure>
+            <TitleRight>
+              <TitleMain>
+                <H4 color="var(--color--secondary_8)" className="semibold">
+                  {DoAn.tenDeTai}
+                </H4>
+              </TitleMain>
+              <TitleSubtitle>
+                <P2 color="var(--color--secondary_8)">
+                  Mã đồ án: <strong>{DoAn.maDoAn}</strong>
+                </P2>
+                <P2 color="var(--color--secondary_8)">
+                  Giảng viên hướng dẫn: <strong>{DoAn.giangVienHD}</strong>
+                </P2>
+                <P2 color="var(--color--secondary_8)">
+                  Ngày đăng ký:{" "}
+                  <strong>
+                    {new Date(DoAn.ngayThamGia).toLocaleDateString()}
+                  </strong>
+                </P2>
+
+                <Badges
+                  shadow={true}
+                  color={"var(--color--secondary_1)"}
+                  bgcolor={
+                    DoAn.trangThai === 0
+                      ? "var(--color--red_7)"
+                      : "var(--color--green_7)"
+                  }
+                  label={
+                    DoAn.trangThai === 0 ? "Đang tiến hành" : "Chờ phản biện"
+                  }
+                />
+              </TitleSubtitle>
+            </TitleRight>
+          </TitleOverview>
+          <TitileTab>
+            <TabHeaderContents
+              TabArr={TabArr}
+              isActive={isActive}
+              setIsActive={setIsActive}
+            />
+          </TitileTab>
+        </QuanLyTitle>
+        <TabContentContents TabArr={TabArr} isActive={isActive} />
+      </>
     </QuanLyDeTaiSection>
   );
 }

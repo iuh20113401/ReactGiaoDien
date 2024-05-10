@@ -1,4 +1,4 @@
-import fetchApi from "../FetchApi";
+import fetchApi from "../FetchApi.js";
 const API_BASE_URL =
   "https://3.26.182.86/server-main/api/giangVien/phanCongGiangVienPhanBien.php";
 
@@ -18,7 +18,6 @@ export async function layDanhSachGiangVien() {
 
 // Function to assign an instructor for review
 export async function phanGiangVienPhanBien(thongTinPhanCong) {
-  console.log(thongTinPhanCong);
   return fetchApi(`${API_BASE_URL}?resource=phanGiangVienPhanBien`, {
     method: "POST",
     headers: {

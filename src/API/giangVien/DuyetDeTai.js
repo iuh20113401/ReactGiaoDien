@@ -1,4 +1,4 @@
-import fetchApi from "../FetchApi";
+import fetchApi from "../FetchApi.js";
 
 const BASE_URL = "https://3.26.182.86/server-main/api/giangVien";
 

@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import toast from "react-hot-toast";
 import { useState } from "react";
@@ -72,7 +73,6 @@ function GiangVienThemHuongDan() {
         newFormat.chitiethuongdan[index - 1][newFieldName] = data[key].trim();
       }
     });
-    console.log(newFormat);
     themMutate(newFormat);
   }
 

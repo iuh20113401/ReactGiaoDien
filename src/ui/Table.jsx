@@ -1,3 +1,4 @@
+import React from "react";
 import styled, { css } from "styled-components";
 const TableContainer = styled.div`
   grid-template-columns: repeat(12, minmax(calc(100% / 12), 1fr));

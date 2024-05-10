@@ -1,6 +1,6 @@
+import React from "react";
 import styled from "styled-components";
 import { Navigate, Outlet } from "react-router-dom";
-
 import SinhVienNavigation from "../../components/SinhVien/SinhVienNavigation";
 import SinhVienFooter from "../../components/SinhVien/SinhVienFooter";
 import { Spinner } from "../../ui/Spinner";

@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import AccountAvatar, { Avatar } from "../../ui/AccountAvatar";
 import MenuItems from "../../ui/MenuItem";

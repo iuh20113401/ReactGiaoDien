@@ -1,6 +1,5 @@
+import React from "react";
 import styled from "styled-components";
-import { createContext, useContext } from "react";
-import { P2 } from "./Typography";
 const AccordionContainer = styled.div`
   background-color: #fff;
   height: auto;
@@ -31,11 +30,7 @@ const AccordionContent = styled.div`
   transition: all 0.5s ease;
   overflow: hidden;
 `;
-const IconDiv = styled.span`
-  display: inline-flex;
-  align-items: center;
-  margin-right: 3rem;
-`;
+
 export function AccordionItemBasic({
   isActive,
   onClick,

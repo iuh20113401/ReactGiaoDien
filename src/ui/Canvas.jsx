@@ -1,3 +1,4 @@
+import React from "react";
 import styled, { keyframes } from "styled-components";
 import { HiX } from "react-icons/hi";
 import { P2 } from "./Typography";

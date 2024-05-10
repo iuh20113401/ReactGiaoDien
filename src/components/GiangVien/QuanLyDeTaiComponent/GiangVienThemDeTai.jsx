@@ -1,18 +1,26 @@
+import React from "react";
 import styled from "styled-components";
 import ReactQuill from "react-quill";
 import toast from "react-hot-toast";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import "react-quill/dist/quill.snow.css";
 
-import { H5, H6, P2 } from "../../../ui/Typography";
+import { H5, P2 } from "../../../ui/Typography";
 import Form from "../../../ui/Form";
 import { InputContainer } from "../../../ui/Input";
 import { DoubleContainer } from "../../../ui/Container";
 import { Controller, useForm } from "react-hook-form";
 import { Button, OutlineButton } from "../../../ui/Button";
-import { layDanhSachDanhMuc, themDeTai } from "../../../API/giangVien/DeTai";
+import {
+  layDanhSachDanhMuc,
+  layDeTaiTheoMa,
+  suaDeTai,
+  themDeTai,
+} from "../../../API/giangVien/DeTai";
 import UseThongTinTaiKhoan from "../../../hooks/UseThongTinTaiKhoan";
 import Loading from "../../../pages/Loading";
+import { useSearchParams } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
 const ThemDeTaiContainer = styled.section`
   display: flex;
   flex-direction: column;
@@ -43,14 +51,42 @@ const modules = {
     ["clean"],
   ],
 };
+
 function GiangVienThemDeTai() {
+  const [searchParams] = useSearchParams();
+  const maDeTai = searchParams.get("maDeTai");
   const { data: thongTinNguoiDung } = UseThongTinTaiKhoan();
-  const { control, handleSubmit, register, reset } = useForm({
-    defaultValues: {
-      kyNangCanCo: "",
-      moTa: "",
-    },
-  });
+  const [dt, setDT] = useState(null);
+
+  useEffect(() => {
+    const fetchThongTinDeTai = async () => {
+      if (maDeTai) {
+        try {
+          const dt = await layDeTaiTheoMa(maDeTai);
+          setDT(dt);
+        } catch (error) {
+          toast.error("Lỗi: " + error.message);
+        }
+      }
+    };
+    fetchThongTinDeTai();
+  }, [maDeTai]);
+
+  const { control, handleSubmit, register, reset } = useForm({});
+  useEffect(() => {
+    const defaultValues = {
+      maDeTai: dt ? dt.MaDeTai : "",
+      tenDeTai: dt ? dt.TenDeTai : "",
+      ketQuaCanDat: dt ? dt.KetQuaCanDat : "",
+      loai: dt ? dt.Loai : "",
+      danhMuc: dt ? dt.DanhMuc : "",
+      moTa: dt ? dt.MoTa : "",
+      kyNangCanCo: dt ? dt.KyNangCanCo : "",
+      tag: dt ? dt.Tag : "",
+      hinhanh: dt ? dt.HinhAnh : "",
+    };
+    reset(defaultValues);
+  }, [dt, reset]);
   const { mutate: themMutate, isPending } = useMutation({
     mutationFn: themDeTai,
     onSuccess: (data) => {
@@ -61,31 +97,47 @@ function GiangVienThemDeTai() {
       toast.error("Thêm thất bại: " + error.message);
     },
   });
+  const { mutate: suaMutate, isLoading: suaLoading } = useMutation({
+    mutationFn: suaDeTai,
+    onSuccess: (data) => {
+      toast.success("Sửa thành công");
+      reset();
+    },
+    onError: (error) => {
+      toast.error("Sửa thất bại: " + error.message);
+    },
+  });
   const { data: danhSachDanhMuc, isLoading: danhMucLoading } = useQuery({
     queryKey: ["danhSachDanhMuc"],
     queryFn: layDanhSachDanhMuc,
   });
   function themDeTaiHandler(data) {
     const maGiangVien = thongTinNguoiDung.maGiangVien + "";
-    const maDeTai =
-      Math.floor(Math.random() * (9999 - 0) + 0).toString() +
-      maGiangVien.slice(-4);
+    if (dt) {
+      console.log(data);
 
-    const formData = new FormData();
-    formData.append("maGiangVien", maGiangVien);
-    formData.append("maDeTai", maDeTai);
-    formData.append("tenDeTai", data.tenDeTai);
-    formData.append("moTa", data.moTa);
-    formData.append("kyNangCanCo", data.kyNangCanCo);
-    formData.append("ketQuaCanDat", data.ketQuaCanDat);
-    formData.append("loai", data.loai);
-    formData.append("danhMuc", data.danhMuc);
-    formData.append("tag", data.tag);
+      suaMutate(data);
+    } else {
+      const maDeTai =
+        Math.floor(Math.random() * (9999 - 0) + 0).toString() +
+        maGiangVien.slice(-4);
 
-    if (data["hinhanh"]) {
-      formData.append("hinhanh", data["hinhanh"][0]); // Assumes 'file' is the File object from input type=file
+      const formData = new FormData();
+      formData.append("maGiangVien", maGiangVien);
+      formData.append("maDeTai", maDeTai);
+      formData.append("tenDeTai", data.tenDeTai);
+      formData.append("moTa", data.moTa);
+      formData.append("kyNangCanCo", data.kyNangCanCo);
+      formData.append("ketQuaCanDat", data.ketQuaCanDat);
+      formData.append("loai", data.loai);
+      formData.append("danhMuc", data.danhMuc);
+      formData.append("tag", data.tag);
+
+      if (data["hinhanh"]) {
+        formData.append("hinhanh", data["hinhanh"][0]); // Assumes 'file' is the File object from input type=file
+      }
+      themMutate(formData);
     }
-    themMutate(formData);
   }
   const isLoading = isPending || danhMucLoading;
   return (
@@ -213,18 +265,24 @@ function GiangVienThemDeTai() {
                 register={{ ...register("tag") }}
               />
             </InputContainer>
-            <InputContainer>
-              <InputContainer.Label>
-                <P2 size="1.4" htmlFor="nhan" color="var(--color--secondary_6)">
-                  Hình ảnh đề tài
-                </P2>
-              </InputContainer.Label>
-              <InputContainer.Input
-                type="file"
-                id="hinanh"
-                register={{ ...register("hinhanh") }}
-              />
-            </InputContainer>
+            {!dt && (
+              <InputContainer>
+                <InputContainer.Label>
+                  <P2
+                    size="1.4"
+                    htmlFor="nhan"
+                    color="var(--color--secondary_6)"
+                  >
+                    Hình ảnh đề tài
+                  </P2>
+                </InputContainer.Label>
+                <InputContainer.Input
+                  type="file"
+                  id="hinanh"
+                  register={{ ...register("hinhanh") }}
+                />
+              </InputContainer>
+            )}
             <div className="flex g-16">
               <OutlineButton color="var(--color--main_7)">
                 Quay lại
@@ -233,8 +291,9 @@ function GiangVienThemDeTai() {
               <Button
                 bgcolor="var(--color--main_7)"
                 color="var(--color--secondary_1)"
+                disabled={suaLoading || isPending}
               >
-                Thêm đề tài
+                {dt ? "Sửa đề tài" : "Thêm đề tài"}
               </Button>
             </div>
           </Form>

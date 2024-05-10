@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -10,7 +11,8 @@ import { layDanhSachComment, themComment } from "../../../../API/ApiComment";
 import { formatDate } from "../../../../utils/formatDate";
 import useThongTinDoAn from "../../../../hooks/sinhVien/useThongTinDoAn";
 import { Rule } from "./OverviewLeft";
-
+import Logo from "../../../../../public/hinhanh/iuh_logo_1.png";
+import { Spinner } from "../../../../ui/Spinner";
 const OverviewComment = styled.div`
   width: 100%;
   background-color: #fff;
@@ -91,10 +93,7 @@ function CommentContainer({ danhSachComment }) {
           return (
             <Comment>
               <CommentLeft>
-                <img
-                  src={comment.hinhanh || "../public/hinhanh/iuh_logo_1.png"}
-                  alt="logo of avatar"
-                />
+                <img src={comment.hinhanh || Logo} alt="logo of avatar" />
               </CommentLeft>
               <CommentRight>
                 <div className="flex g-24 flexBaseline">
@@ -118,7 +117,7 @@ function CommentContainer({ danhSachComment }) {
 }
 function CommentFieldContainer({ refetch }) {
   const [noiDung, setNoiDung] = useState("");
-  const { mutate, isPending } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: themComment,
     onSuccess: () => {
       setNoiDung("");
@@ -160,8 +159,13 @@ function CommentFieldContainer({ refetch }) {
           bgcolor="var(--color--main_7)"
           color="var(--color--secondary_1)"
           size="lg"
+          disabled={isLoading}
         >
-          Đăng tải
+          {isLoading ? (
+            <Spinner size="2" color="var(--color--secondary_1)" />
+          ) : (
+            "Đăng tải"
+          )}
         </Button>
       </ButtonGroup>
     </CommentField>

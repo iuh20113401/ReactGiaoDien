@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 import Badges from "../../../../ui/Badge";
@@ -6,6 +7,7 @@ import { Button } from "../../../../ui/Button";
 import useThongTinDoAn from "../../../../hooks/sinhVien/useThongTinDoAn";
 import UseThongTinTaiKhoan from "../../../../hooks/UseThongTinTaiKhoan";
 import MoiSinhVien from "./MoiSinhVien";
+import Logo from "../../../../../public/hinhanh/iuh_logo_2.png";
 const OverviewRight = styled.aside`
   width: 24%;
   display: flex;
@@ -32,9 +34,12 @@ const TagList = styled.div`
 const MemberAvatar = styled.figure`
   width: 3.2rem;
   height: 3.2rem;
-  background-color: red;
   border-radius: 50%;
   flex-shrink: 0;
+  & > img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 function OverviewRightContainer() {
   return (
@@ -74,7 +79,9 @@ function MemberContainer() {
     <Container>
       <MoiSinhVien />
       <div className="flex g-24 flexCenter">
-        <MemberAvatar></MemberAvatar>
+        <MemberAvatar>
+          <img src={thongtinsinhvien.anhDaiDien || Logo} alt="avatar" />
+        </MemberAvatar>
         <P2 color="var(--color--secondary_8)" size="1.4">
           {DoAn.tenSinhVien1}
         </P2>
@@ -86,7 +93,9 @@ function MemberContainer() {
       </div>
       {DoAn.maSinhVien2 && (
         <div className="flex g-24 flexCenter">
-          <MemberAvatar></MemberAvatar>
+          <MemberAvatar>
+            <img src={thongtinsinhvien.anhDaiDien || Logo} alt="avatar" />
+          </MemberAvatar>
           <P2 color="var(--color--secondary_8)" size="1.4">
             {DoAn.tenSinhVien2}
           </P2>
@@ -98,7 +107,9 @@ function MemberContainer() {
         </div>
       )}
       <div className="flex g-spaceBetween flexCenter">
-        <MemberAvatar></MemberAvatar>
+        <MemberAvatar>
+          <img src={thongtinsinhvien.anhDaiDien || Logo} alt="avatar" />
+        </MemberAvatar>
         <div>
           <P2 color="var(--color--secondary_8)" size="1.4">
             {DoAn.giangVienHD}

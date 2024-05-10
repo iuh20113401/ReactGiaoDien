@@ -9,6 +9,7 @@ import {
   layNoiDungTinNhan,
 } from "../API/ApiChat";
 import { Spinner } from "../ui/Spinner";
+import Loading from "./Loading";
 
 const Container = styled.div`
   display: flex;
@@ -145,7 +146,6 @@ const ChatApp = () => {
         ? layDanhSachLienLac(thongTinNguoiDung.maSinhVien)
         : layDanhSachLienLacChoGiangVien(thongTinNguoiDung.maGiangVien);
     },
-    onError: (error) => console.log(error),
   });
 
   const danhSachLienLac = useMemo(() => {
@@ -214,7 +214,7 @@ const ChatApp = () => {
 function Right({ nguoiGui, nguoiNhan }) {
   const {
     data: messages,
-    isLoading,
+    isLoading: waitingMessages,
     refetch,
   } = useQuery({
     queryKey: ["messages"],
@@ -225,14 +225,11 @@ function Right({ nguoiGui, nguoiNhan }) {
   }, [nguoiNhan, refetch]);
   const tinNhan = useRef(null);
   const quyeryClient = useQueryClient();
-  const { mutate, isPending } = useMutation({
+  const { mutate, isLoading: sendingLoading } = useMutation({
     mutationFn: guiTinNhan,
     onSuccess: (data) => {
       tinNhan.current.value = "";
       quyeryClient.invalidateQueries("messages");
-    },
-    onError: (error) => {
-      console.log(error);
     },
   });
   const handleSubmit = (event) => {
@@ -241,8 +238,8 @@ function Right({ nguoiGui, nguoiNhan }) {
   };
   return (
     <Side className="right">
-      {isLoading && <Spinner />}
-      {!isLoading && (
+      {waitingMessages && <Loading size={4.8} color="var(--color--main_7)" />}
+      {!waitingMessages && (
         <>
           <ChatArea>
             {messages.map((message, index) => (
@@ -259,7 +256,9 @@ function Right({ nguoiGui, nguoiNhan }) {
           <form onSubmit={handleSubmit}>
             <MessageInput>
               <Input ref={tinNhan} placeholder="Type a message..." />
-              <SendButton>Send</SendButton>
+              <SendButton disabled={sendingLoading}>
+                {sendingLoading ? <Spinner size="1" color="white" /> : "Send"}
+              </SendButton>
             </MessageInput>
           </form>
         </>

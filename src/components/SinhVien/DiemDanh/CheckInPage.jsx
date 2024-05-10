@@ -1,3 +1,4 @@
+import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +7,6 @@ import { Spinner } from "../../../ui/Spinner";
 import toast from "react-hot-toast";
 
 export function CheckInPage({ data }) {
-  console.log(data);
   const [status, setStatus] = useState({
     status: "loading",
     message: "Đang xác minh vị trí...",

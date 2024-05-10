@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -14,7 +15,8 @@ import {
   phanGiangVienPhanBien,
 } from "../../API/giangVien/phanGiangVienPhanBien";
 import { Spinner } from "../../ui/Spinner";
-
+import Logo from "../../../public/hinhanh/iuh_logo_1.png";
+import NotFoundImage from "../../../public/hinhanh/not_found_2.webp";
 const DoAnContainer = styled.div`
   display: flex;
   height: auto;
@@ -61,7 +63,7 @@ export function DanhSachDoAnContainer({ DanhSachDoAn, setChiTiet }) {
   return DanhSachDoAn.length > 0 ? (
     DanhSachDoAn.map((da) => <ChiTietDoAn da={da} setChiTiet={setChiTiet} />)
   ) : (
-    <img src="../public/hinhanh/not_found_2.webp" alt="not found" />
+    <img src={NotFoundImage} alt="not found" />
   );
 }
 function ChiTietDoAn({ da, setChiTiet }) {
@@ -82,10 +84,7 @@ function ChiTietDoAn({ da, setChiTiet }) {
       }}
     >
       <DoAnLeft>
-        <img
-          src={da.hinhAnh || "../public/hinhanh/iuh_logo_1.png"}
-          alt="Hình ảnh của đề tài"
-        />
+        <img src={da.hinhAnh || Logo} alt="Hình ảnh của đề tài" />
       </DoAnLeft>
       <DoAnRight>
         <P2 size="1.4rem" className="bold">

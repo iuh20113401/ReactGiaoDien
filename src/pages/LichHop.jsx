@@ -30,8 +30,9 @@ const Container = styled.article`
 
 const LichHop = () => {
   const { data } = UseThongTinTaiKhoan();
+  console.log(data);
   const vaiTro = data.vaiTro;
-  console.log(data, vaiTro);
+
   const [active, setActive] = useState(false);
   const {
     data: events,
@@ -76,7 +77,7 @@ const LichHop = () => {
       }));
     },
   });
-  console.log(events);
+
   return (
     <LichHopContainer>
       <H5>Lịch họp</H5>

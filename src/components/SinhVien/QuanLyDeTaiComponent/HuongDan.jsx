@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
@@ -8,7 +9,7 @@ import { InputContainer } from "../../../ui/Input";
 import { hoanThanhHuongDan } from "../../../API/sinhVien/DeTai";
 import useThongTinDoAn from "../../../hooks/sinhVien/useThongTinDoAn";
 import Loading from "../../../pages/Loading";
-
+import NothingHere from "../../../../public/hinhanh/Nothing_here_yet_3.webp";
 const HuongDanContainer = styled.article`
   margin-top: 0.8rem;
   display: flex;
@@ -32,10 +33,7 @@ const NoiDungHuongDanContainer = styled.div`
   gap: 1.6rem;
   border-radius: 0.3rem;
 `;
-const NoiDungHuongDan = styled.div`
-  display: flex;
-  gap: 1.6rem;
-`;
+
 function HuongDan() {
   const { data, isLoading, error, isError } = useThongTinDoAn();
   const NoiDungHuongDan = data.huongDan;
@@ -76,7 +74,7 @@ function HuongDan() {
       {!NoiDungHuongDan.length && (
         <NoiDungHuongDanContainer className="flex flexCenter">
           <img
-            src="../public/hinhanh/Nothing_here_yet_3.webp"
+            src={NothingHere}
             alt="NOthing here "
             width={"1000rem"}
             height={"1000rem"}

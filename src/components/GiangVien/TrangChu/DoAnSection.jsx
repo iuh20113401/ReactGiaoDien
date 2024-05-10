@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { HiCheckCircle, HiXCircle } from "react-icons/hi";
 import { P2 } from "../../../ui/Typography";

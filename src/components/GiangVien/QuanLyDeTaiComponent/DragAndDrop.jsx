@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
@@ -80,7 +81,6 @@ export function DragAndDrop({ maDoAn, refetch }) {
     try {
       const url =
         "http://localhost/server/api/sinhvien/detai.php?resource=themTaiLieu";
-      console.log(url);
       const response = await fetch(url, {
         method: "POST",
         body: formData,

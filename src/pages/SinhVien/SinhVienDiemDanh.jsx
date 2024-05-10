@@ -1,3 +1,4 @@
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { layThongTinDiemDanh } from "../../API/sinhVien/DeTai";
@@ -9,7 +10,6 @@ import { useEffect } from "react";
 function SinhVienDiemDanh() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { data } = UseThongTinTaiKhoan();
-  console.log(1);
   const diemDanhData = searchParams.get("data");
   const { maSinhVien } = data || {};
   const maDiemDanh = JSON.parse(diemDanhData)?.maDiemDanh;

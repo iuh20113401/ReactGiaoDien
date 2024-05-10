@@ -1,3 +1,4 @@
+import React from "react";
 import { P2 } from "../../../ui/Typography";
 import { Col, Col2, Row } from "../../../ui/Table";
 

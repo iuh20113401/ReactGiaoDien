@@ -1,3 +1,4 @@
+import React from "react";
 import styled, { css, keyframes } from "styled-components";
 import { useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -9,6 +10,7 @@ import Badges from "../../../ui/Badge";
 import { P2 } from "../../../ui/Typography";
 import { Button, OutlineButton } from "../../../ui/Button";
 import Loading from "../../../pages/Loading";
+import Logo from "../../../../public/hinhanh/iuh_logo_2.png";
 const rotateAndTranslate = keyframes`
   0% { 
     transform: rotateY(0) translateX(0); 
@@ -75,15 +77,7 @@ const BackContainer = styled.div`
           ${rotateAndTranslate} 0.6s ease forwards
         `};
 `;
-const DeTaiListContaienr = styled.div`
-  width: 100%;
-  padding: 0 1.6rem;
-`;
-const DeTaiList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
-`;
+
 const DoAnLeft = styled.aside`
   width: 9.6rem;
   height: 6.4rem;
@@ -195,10 +189,7 @@ function ChiTietLoiMoi({ dt, maSinhVien }) {
     >
       <FrontContainer type={!thamGia ? "active" : "hidden"}>
         <DoAnLeft>
-          <img
-            src={dt.HinhAnh || "../public/hinhanh/iuh_logo_2.png"}
-            alt="Hình ảnh đề tài"
-          />
+          <img src={dt.HinhAnh || Logo} alt="Hình ảnh đề tài" />
         </DoAnLeft>
         <DoAnRight>
           <P2 size="1.6" className="bold">

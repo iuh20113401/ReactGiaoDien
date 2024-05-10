@@ -1,17 +1,14 @@
+import React from "react";
 import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { P2 } from "../../../ui/Typography";
 import { Button } from "../../../ui/Button";
-import {
-  layDanhSachDeTaiDaDangKy,
-  themHuongDanVaoDoAn,
-} from "../../../API/giangVien/DeTai";
+import { themHuongDanVaoDoAn } from "../../../API/giangVien/DeTai";
 import { formatDate } from "../../../utils/formatDate";
 import CanvaContainer from "../../../ui/Canvas";
 import { InputContainer } from "../../../ui/Input";
-import UseThongTinTaiKhoan from "../../../hooks/UseThongTinTaiKhoan";
 import { Danhsachdetai } from "../RightContent/Danhsachdetai";
 import { DanhSachDoAn } from "../RightContent/DanhSachDoAn";
 

@@ -1,3 +1,4 @@
+import React from "react";
 import { H6, P2 } from "../../../ui/Typography";
 import { Button } from "../../../ui/Button";
 import { Container, MemberAvatar } from "./OverviewRight";

@@ -1,4 +1,4 @@
-import fetchApi from "../FetchApi";
+import fetchApi from "../FetchApi.js";
 
 const BASE_URL = "https://3.26.182.86/server-main/api/giangVien/deTai.php";
 
@@ -22,6 +22,12 @@ export async function layDanhSachDanhMuc() {
 }
 export async function layDanhSachDeTaiDaDangKy(thongTinGiangVien) {
   const url = `${BASE_URL}?resource=danhSachDeTaiDaDangKy&maGiangVien=${thongTinGiangVien.maGiangVien}`;
+  return fetchApi(url, {
+    method: "GET",
+  });
+}
+export async function layDeTaiTheoMa(maDeTai) {
+  const url = `${BASE_URL}?resource=deTaiTheoMa&maDeTai=${maDeTai}`;
   return fetchApi(url, {
     method: "GET",
   });
@@ -103,10 +109,9 @@ export async function thongKeDeTai(data) {
 
 export async function suaDeTai(deTai) {
   const url = `${BASE_URL}?resource=deTai`;
-  const body = JSON.stringify(deTai);
   return fetchApi(url, {
     method: "PUT",
-    body,
+    body: JSON.stringify(deTai),
   });
 }
 export async function xoaDeTai(deTai) {

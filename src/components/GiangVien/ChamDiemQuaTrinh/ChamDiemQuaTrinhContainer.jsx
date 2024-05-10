@@ -1,3 +1,4 @@
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { P2 } from "../../../ui/Typography";
@@ -6,7 +7,7 @@ import { Container } from "../../../pages/GiangVien/GiangVienChamDiem";
 import { layDanhSachDiemQuaTrinh } from "../../../API/giangVien/DoAn";
 import { DanhSachDiemQuaTrinhContainer } from "./DanhSachDiemQuaTrinhContainer";
 import Loading from "../../../pages/Loading";
-
+import NothingHere from "../../../../public/hinhanh/Nothing_here_yet_1.webp";
 export function ChamDiemQuaTrinhContainer() {
   const { data: thongTinNguoiDung } = useQuery({
     queryKey: ["thongTinTaiKhoan"],
@@ -22,7 +23,7 @@ export function ChamDiemQuaTrinhContainer() {
       {!isLoading && !DanhSachSinhVien.length && (
         <Container className="flex flexCenter">
           <img
-            src="../public/hinhanh/Nothing_here_yet_1.webp"
+            src={NothingHere}
             alt="Nothing here yet"
             width={"512rem"}
             height={"512rem"}

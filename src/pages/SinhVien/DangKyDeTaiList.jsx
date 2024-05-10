@@ -1,3 +1,4 @@
+import React from "react";
 import styled, { css, keyframes } from "styled-components";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";

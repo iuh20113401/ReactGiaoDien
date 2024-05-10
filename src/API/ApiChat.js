@@ -16,7 +16,6 @@ export async function layDanhSachLienLac(maSinhVien) {
   }
 }
 export async function layNoiDungTinNhan(nguoiGui, nguoiNhan) {
-  console.log(nguoiGui, nguoiNhan);
   try {
     const response = await fetch(
       `https://3.26.182.86/server-main/api/chatApp/chatApp.php?action=getChat&nguoiGui=${nguoiGui}&nguoiNhan=${nguoiNhan}`,

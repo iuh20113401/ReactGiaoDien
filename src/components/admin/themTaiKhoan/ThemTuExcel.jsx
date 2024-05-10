@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { read, utils } from "xlsx";
@@ -19,7 +20,6 @@ function ThemTuExcel() {
   const { mutate, isPending, isError } = useMutation({
     mutationFn: (data) => {
       const vaiTro = data.vaiTro;
-      console.log(data);
       if (+vaiTro === 0) {
         data.matKhau = "sinhvien123";
         themSinhVien(data);

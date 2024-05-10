@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { BiReset, BiTrash } from "react-icons/bi";
 import toast from "react-hot-toast";

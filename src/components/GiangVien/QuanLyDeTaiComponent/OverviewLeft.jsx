@@ -1,7 +1,8 @@
+import React from "react";
 import styled, { css } from "styled-components";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { PiMicrosoftPowerpointLogo } from "react-icons/pi";
+import { NavLink } from "react-router-dom";
 
 import { H6, P2 } from "../../../ui/Typography";
 import Badges from "../../../ui/Badge";
@@ -14,8 +15,8 @@ import { formatDate } from "../../../utils/formatDate";
 import useThongTinDoAn from "../../../hooks/useThongTinDoAn";
 import useSearchParamGet from "../../../hooks/useSearchParamGet";
 import { layDanhSachTaiLieu } from "../../../API/sinhVien/DeTai";
-import { NavLink } from "react-router-dom";
 import Loading from "../../../pages/Loading";
+import Logo from "../../../../public/hinhanh/iuh_logo_1.png";
 const OverviewLeft = styled.aside`
   width: 75%;
   display: flex;
@@ -250,7 +251,7 @@ function OverviewSummaryContainer() {
 }
 function OverviewCommentContainer() {
   const maDoAn = useSearchParamGet("maDoAn");
-  const { data: DoAn, isLoading, isError, error } = useThongTinDoAn({ maDoAn });
+  const { data: DoAn, isLoading } = useThongTinDoAn({ maDoAn });
   const {
     data: comment,
     refetch,
@@ -261,7 +262,10 @@ function OverviewCommentContainer() {
       return layDanhSachComment(DoAn.maDoAn);
     },
   });
-
+  if (isLoading)
+    return (
+      <Loading size={8.4} color={"var(--color--main_7)"} className="flex" />
+    );
   return (
     <OverviewComment>
       <H6>Bình luận</H6>
@@ -285,11 +289,7 @@ function CommentContainer({ danhSachComment }) {
             <Comment>
               <CommentLeft>
                 <img
-                  src={
-                    comment.hinhanh
-                      ? "../" + comment.hinhanh
-                      : "../../public/hinhanh/iuh_logo_1.png"
-                  }
+                  src={comment.hinhanh ? "../" + comment.hinhanh : Logo}
                   alt="logo of avatar"
                 />
               </CommentLeft>

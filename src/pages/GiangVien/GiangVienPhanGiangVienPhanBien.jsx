@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
@@ -47,7 +48,6 @@ export function GiangVienPhanGiangVienPhanBien() {
         ? dt.tenDeTai.toLowerCase().includes(searchTen.toLowerCase())
         : true;
       const param = searchParam.get("giangvien");
-      console.log(dt.maGiangVien, param);
       const isSearchParam = param ? dt.maGiangVien === +param : true;
       return isSearchParam && isSearchTen;
     });

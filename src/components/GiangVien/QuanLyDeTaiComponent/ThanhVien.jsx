@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { useQuery } from "@tanstack/react-query";
 import { RxAvatar } from "react-icons/rx";

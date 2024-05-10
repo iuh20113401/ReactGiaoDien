@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
@@ -11,7 +12,7 @@ import {
   TagList,
   ButtonDangKy,
 } from "../../../pages/GiangVien/GiangVienXemDanhSachDoAn";
-
+import Logo from "../../../../public/hinhanh/iuh_logo_2.png";
 export function DanhSachDoAnContainer({ DanhSachDoAn }) {
   const { data: thongTinNguoiDung } = useQuery({
     queryKey: ["thongTinTaiKhoan"],
@@ -24,10 +25,7 @@ export function DanhSachDoAnContainer({ DanhSachDoAn }) {
     return (
       <DoAnContainer>
         <DoAnLeft>
-          <img
-            src={da.HinhAnh || "../public/hinhanh/iuh_logo_2.png"}
-            alt="Hình ảnh đề tài"
-          />
+          <img src={da.HinhAnh || { Logo }} alt="Hình ảnh đề tài" />
         </DoAnLeft>
         <DoAnRight>
           <P2 size="1.6" className="bold">

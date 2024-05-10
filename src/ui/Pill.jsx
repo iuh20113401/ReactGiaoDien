@@ -1,5 +1,5 @@
+import React from "react";
 import styled, { css } from "styled-components";
-import { HiOutlineHome } from "react-icons/hi2";
 
 const PillContainer = styled.div`
   display: flex;

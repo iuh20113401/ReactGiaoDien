@@ -1,3 +1,4 @@
+import React from "react";
 import ReactQuill from "react-quill";
 import toast from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";

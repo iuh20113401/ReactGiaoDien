@@ -1,9 +1,10 @@
+import React from "react";
 import styled from "styled-components";
 import { HiCheckCircle, HiXCircle } from "react-icons/hi";
 
 import { P2 } from "../../../ui/Typography";
 import CreateProgressBar from "../../../ui/ProgressBar";
-
+import Logo from "../../../../public/hinhanh/iuh_logo_2.png";
 const OverviewContainer = styled.div`
   height: auto;
   display: grid;
@@ -116,11 +117,7 @@ function OvewiewChart() {
             </P2>
           </TongQuanContainer>
         </LargeContainerRight>
-        <img
-          src="../public/hinhanh/iuh_logo_2.png"
-          width={"200px"}
-          alt="logo of iuh"
-        />
+        <img src={Logo} width={"200px"} alt="logo of iuh" />
       </LargeContainer>
 
       <div>

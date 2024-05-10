@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import styled, { css } from "styled-components";

@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import React, { Fragment, Suspense, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   BrowserRouter as Router,
@@ -10,34 +10,75 @@ import {
 } from "react-router-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
-
-import LoginPage from "./pages/LoginPage";
-import GlobalStyles from "./global/GlobalStyles";
-import SinhVienTrangChu from "./pages/SinhVien/SinhVienTrangChu";
-import SinhVienDangKyDeTai from "./pages/SinhVien/SinhVienDangKyDeTai";
-import SinhVienQuanLyDeTai from "./pages/SinhVien/SinhVienQuanLyDeTai";
-import SinhVienLayout from "./pages/SinhVien/SinhVienLayout";
-import GiangVienLayout from "./pages/GiangVien/GiangVienLayout";
-import GiangVienTrangChu from "./pages/GiangVien/GiangVienTrangChu";
-import GiangVienQuanLyDeTai from "./pages/GiangVien/GiangVienQuanLyDeTai";
-import GiangVienXemDanhSachSinhVien from "./pages/GiangVien/GiangVienXemDanhSachSinhVien";
-import GiangVienXemChiTietDoAn from "./pages/GiangVien/GiangVienXemChiTietDoAn";
-import GiangVienChamDiem from "./pages/GiangVien/GiangVienChamDiem";
-import GiangVienDuyetDeTai from "./pages/GiangVien/GiangVienDuyetDeTai";
-import GiangVienPhanGiangVienPhanBien from "./pages/GiangVien/GiangVienPhanGiangVienPhanBien";
-import ChatApp from "./pages/TroChuyen";
-import LichHop from "./pages/LichHop";
 import Cookies from "universal-cookie";
-import GiangVienXemDanhSachDoAn from "./pages/GiangVien/GiangVienXemDanhSachDoAn";
-import GiangVienHuongDanDoAn from "./pages/GiangVien/GiangVienHuongDanDoAn";
-import GiangVienThemHuongDan from "./components/GiangVien/HuongDan/GiangVienThemHuongDan";
-import GiangVienDiemDanh from "./pages/GiangVien/GiangVienDiemDanh";
-import SinhVienDiemDanh from "./pages/SinhVien/SinhVienDiemDanh";
-import GiangVienQuanLyDanhMuc from "./pages/GiangVien/GiangVienQuanLyDanhMuc";
-import GiangVienThemDeTai from "./components/GiangVien/QuanLyDeTaiComponent/GiangVienThemDeTai";
-import XemTaiKhoan from "./pages/admin/XemTaiKhoan";
-import ThemTaiKhoan from "./pages/admin/ThemTaiKhoan";
-import GiangVienThongTinGiangVien from "./pages/GiangVien/GiangVienThongTinGiangVien";
+
+const Loading = React.lazy(() => import("./pages/Loading.jsx"));
+const LoginPage = React.lazy(() => import("./pages/LoginPage.jsx"));
+const GlobalStyles = React.lazy(() => import("./global/GlobalStyles"));
+const SinhVienTrangChu = React.lazy(() =>
+  import("./pages/SinhVien/SinhVienTrangChu")
+);
+const SinhVienDangKyDeTai = React.lazy(() =>
+  import("./pages/SinhVien/SinhVienDangKyDeTai")
+);
+const SinhVienQuanLyDeTai = React.lazy(() =>
+  import("./pages/SinhVien/SinhVienQuanLyDeTai")
+);
+const SinhVienLayout = React.lazy(() =>
+  import("./pages/SinhVien/SinhVienLayout")
+);
+const GiangVienLayout = React.lazy(() =>
+  import("./pages/GiangVien/GiangVienLayout")
+);
+const GiangVienTrangChu = React.lazy(() =>
+  import("./pages/GiangVien/GiangVienTrangChu")
+);
+const GiangVienQuanLyDeTai = React.lazy(() =>
+  import("./pages/GiangVien/GiangVienQuanLyDeTai")
+);
+const GiangVienXemDanhSachSinhVien = React.lazy(() =>
+  import("./pages/GiangVien/GiangVienXemDanhSachSinhVien")
+);
+const GiangVienXemChiTietDoAn = React.lazy(() =>
+  import("./pages/GiangVien/GiangVienXemChiTietDoAn")
+);
+const GiangVienChamDiem = React.lazy(() =>
+  import("./pages/GiangVien/GiangVienChamDiem")
+);
+const GiangVienDuyetDeTai = React.lazy(() =>
+  import("./pages/GiangVien/GiangVienDuyetDeTai")
+);
+const GiangVienPhanGiangVienPhanBien = React.lazy(() =>
+  import("./pages/GiangVien/GiangVienPhanGiangVienPhanBien")
+);
+const ChatApp = React.lazy(() => import("./pages/TroChuyen"));
+const LichHop = React.lazy(() => import("./pages/LichHop"));
+const GiangVienXemDanhSachDoAn = React.lazy(() =>
+  import("./pages/GiangVien/GiangVienXemDanhSachDoAn")
+);
+const GiangVienHuongDanDoAn = React.lazy(() =>
+  import("./pages/GiangVien/GiangVienHuongDanDoAn")
+);
+const GiangVienThemHuongDan = React.lazy(() =>
+  import("./components/GiangVien/HuongDan/GiangVienThemHuongDan")
+);
+const GiangVienDiemDanh = React.lazy(() =>
+  import("./pages/GiangVien/GiangVienDiemDanh")
+);
+const SinhVienDiemDanh = React.lazy(() =>
+  import("./pages/SinhVien/SinhVienDiemDanh")
+);
+const GiangVienQuanLyDanhMuc = React.lazy(() =>
+  import("./pages/GiangVien/GiangVienQuanLyDanhMuc")
+);
+const GiangVienThemDeTai = React.lazy(() =>
+  import("./components/GiangVien/QuanLyDeTaiComponent/GiangVienThemDeTai")
+);
+const XemTaiKhoan = React.lazy(() => import("./pages/admin/XemTaiKhoan"));
+const ThemTaiKhoan = React.lazy(() => import("./pages/admin/ThemTaiKhoan"));
+const GiangVienThongTinGiangVien = React.lazy(() =>
+  import("./pages/GiangVien/GiangVienThongTinGiangVien")
+);
 
 const queryClient = new QueryClient({
   defaultOption: {
@@ -86,76 +127,84 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <GlobalStyles />
         <ReactQueryDevtools initialIsOpen={false} />
-        <Router>
-          <Routes>
-            <Route path="/" element={<AutoLoginRedirect />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="sinhvien" element={<SinhVienLayout />}>
-              <Route
-                path="*"
-                index
-                element={<Navigate to="/sinhvien/trangchu" replace />}
-              />
-              <Route path="trangchu" element={<SinhVienTrangChu />} />
-              <Route path="dangkydetai" element={<SinhVienDangKyDeTai />} />
-              <Route path="quanlydetai" element={<SinhVienQuanLyDeTai />} />
-              <Route path="trochuyen" element={<ChatApp />} />
-              <Route path="lichhop" element={<LichHop />} />
-              <Route path="diemdanh" element={<SinhVienDiemDanh />} />
-            </Route>
-            <Route path="giangvien" element={<GiangVienLayout />}>
-              <Route
-                path="*"
-                index
-                element={<Navigate to="/giangvien/trangchu" replace />}
-              />
-              <Route
-                path="thongtincanhan"
-                element={<GiangVienThongTinGiangVien />}
-              />
-              <Route path="trangchu" element={<GiangVienTrangChu />} />
-              <Route path="quanlydetai" element={<GiangVienQuanLyDeTai />} />
-              <Route
-                path="quanlydetai/ThemDeTai"
-                element={<GiangVienThemDeTai />}
-              />
-              <Route
-                path="xemdanhsachsinhvien"
-                element={<GiangVienXemDanhSachSinhVien />}
-              />
-              <Route
-                path="xemdanhsachdoan"
-                element={<GiangVienXemDanhSachDoAn />}
-              />
-              <Route
-                path="xemdanhsachdoan/chitietdoan"
-                element={<GiangVienXemChiTietDoAn />}
-              />
-              <Route path="chamdiem" element={<GiangVienChamDiem />} />
-              <Route path="duyetdetai" element={<GiangVienDuyetDeTai />} />
-              <Route
-                path="phangiangvienphanbien"
-                element={<GiangVienPhanGiangVienPhanBien />}
-              />
-              <Route path="HuongDan" element={<GiangVienHuongDanDoAn />} />
-              <Route
-                path="huongDan/themhuongdan"
-                element={<GiangVienThemHuongDan />}
-              />
-              <Route
-                path="quanLyDanhMuc"
-                element={<GiangVienQuanLyDanhMuc />}
-              />
-              <Route path="lichhop" element={<LichHop />} />
-              <Route path="troChuyen" element={<ChatApp />} />
-              <Route path="diemdanh" element={<GiangVienDiemDanh />} />
-              {/* for admin */}
+        <Suspense
+          fallback={<Loading size={8.4} color={"var(--color--main_7)"} />}
+        >
+          <Router>
+            <Routes>
+              <Route path="/" element={<AutoLoginRedirect />} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="sinhvien" element={<SinhVienLayout />}>
+                <Route
+                  path="*"
+                  index
+                  element={<Navigate to="/sinhvien/trangchu" replace />}
+                />
+                <Route path="trangchu" element={<SinhVienTrangChu />} />
+                <Route path="dangkydetai" element={<SinhVienDangKyDeTai />} />
+                <Route path="quanlydetai" element={<SinhVienQuanLyDeTai />} />
+                <Route path="trochuyen" element={<ChatApp />} />
+                <Route path="lichhop" element={<LichHop />} />
+                <Route path="diemdanh" element={<SinhVienDiemDanh />} />
+              </Route>
+              <Route path="giangvien" element={<GiangVienLayout />}>
+                <Route
+                  path="*"
+                  index
+                  element={<Navigate to="/giangvien/trangchu" replace />}
+                />
+                <Route
+                  path="thongtincanhan"
+                  element={<GiangVienThongTinGiangVien />}
+                />
+                <Route path="trangchu" element={<GiangVienTrangChu />} />
+                <Route path="quanlydetai" element={<GiangVienQuanLyDeTai />} />
+                <Route
+                  path="quanlydetai/ThemDeTai"
+                  element={<GiangVienThemDeTai />}
+                />
+                <Route
+                  path="quanlydetai/SuaDeTai"
+                  element={<GiangVienThemDeTai />}
+                />
+                <Route
+                  path="xemdanhsachsinhvien"
+                  element={<GiangVienXemDanhSachSinhVien />}
+                />
+                <Route
+                  path="xemdanhsachdoan"
+                  element={<GiangVienXemDanhSachDoAn />}
+                />
+                <Route
+                  path="xemdanhsachdoan/chitietdoan"
+                  element={<GiangVienXemChiTietDoAn />}
+                />
+                <Route path="chamdiem" element={<GiangVienChamDiem />} />
+                <Route path="duyetdetai" element={<GiangVienDuyetDeTai />} />
+                <Route
+                  path="phangiangvienphanbien"
+                  element={<GiangVienPhanGiangVienPhanBien />}
+                />
+                <Route path="HuongDan" element={<GiangVienHuongDanDoAn />} />
+                <Route
+                  path="huongDan/themhuongdan"
+                  element={<GiangVienThemHuongDan />}
+                />
+                <Route
+                  path="quanLyDanhMuc"
+                  element={<GiangVienQuanLyDanhMuc />}
+                />
+                <Route path="lichhop" element={<LichHop />} />
+                <Route path="troChuyen" element={<ChatApp />} />
+                <Route path="diemdanh" element={<GiangVienDiemDanh />} />
+                {/* for admin */}
 
-              <Route path="xemtaikhoan" element={<XemTaiKhoan />} />
-              <Route path="themTaiKhoan" element={<ThemTaiKhoan />} />
-            </Route>
-          </Routes>
-        </Router>
+                <Route path="xemtaikhoan" element={<XemTaiKhoan />} />
+                <Route path="themTaiKhoan" element={<ThemTaiKhoan />} />
+              </Route>
+            </Routes>
+          </Router>
+        </Suspense>
 
         <Toaster
           position="top-center"
