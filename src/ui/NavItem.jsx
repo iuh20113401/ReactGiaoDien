@@ -51,5 +51,11 @@ const MenuItem = styled(NavLink)`
   transition: all 0.2s ease-out;
   text-decoration: none;
   ${(props) => props?.variation && variations[props.variation]}
+  @media screen and (max-width: 400px) {
+    & > h6 {
+      width: fit-content;
+      font-size: 1.2rem;
+    }
+  }
 `;
 export default MenuItem;

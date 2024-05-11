@@ -16,13 +16,13 @@ import { P2 } from "../../ui/Typography";
 import { HiXMark } from "react-icons/hi2";
 import { TagList, IconDiv } from "../../pages/GiangVien/GiangVienDuyetDeTai";
 import { duyetDeTai, khongDuyetDeTai } from "../../API/giangVien/DuyetDeTai";
-
+import "react-quill/dist/quill.snow.css";
 const modules = {
   toolbar: false,
 };
 export function DanhSachDeTaiContainer({ refetch, DanhSachDeTai, setActive }) {
   const newUuid = uuidv4();
-  const { mutate: duyetMutate, isPending } = useMutation({
+  const { mutate: duyetMutate, isLoading } = useMutation({
     mutationFn: duyetDeTai,
     onSuccess: (data) => {
       toast.success("Duyệt đề tài thành công");
@@ -32,7 +32,7 @@ export function DanhSachDeTaiContainer({ refetch, DanhSachDeTai, setActive }) {
       toast.error("Duyệt đề tài không thành công " + error.message);
     },
   });
-  const { mutate: khongDuyetMutate, isPending: khongDuyetPending } =
+  const { mutate: khongDuyetMutate, isLoading: khongDuyetLoading } =
     useMutation({
       mutationFn: khongDuyetDeTai,
       onSuccess: () => {
@@ -67,18 +67,7 @@ export function DanhSachDeTaiContainer({ refetch, DanhSachDeTai, setActive }) {
         }}
       />
       <Col2 className="g-center">
-        <P2 size="1.4">
-          <TagList>
-            {dt.Tag?.split(",").map((tag) => (
-              <Badges
-                bgcolor={"var(--color--main_2)"}
-                color={"var(--color--main_7)"}
-                label={tag}
-                key={tag}
-              />
-            ))}
-          </TagList>
-        </P2>
+        <P2 size="1.4">{dt.tenDanhMuc}</P2>
       </Col2>
       <Col>
         <div className="flex flexColumn g-8">
@@ -137,14 +126,22 @@ export function ChiTietDeTai({ dt, setActive }) {
           <InputContainer.Input type="text" value={dt.loai} readOnly={true} />
         </InputContainer>
         <InputContainer>
+          <InputContainer.Label>Danh mục</InputContainer.Label>
+          <InputContainer.Input
+            type="text"
+            value={dt.tenDanhMuc}
+            readOnly={true}
+          />
+        </InputContainer>
+        <InputContainer>
           <InputContainer.Label>Mô tả</InputContainer.Label>
-          <ReactQuill value={dt.moTa} readonly={true} modules={modules} />
+          <ReactQuill value={dt.moTa} readOnly={true} modules={modules} />
         </InputContainer>
         <InputContainer>
           <InputContainer.Label>Kỹ năng cần có</InputContainer.Label>
           <ReactQuill
             value={dt.kyNangCanCo}
-            readonly={true}
+            readOnly={true}
             modules={modules}
           />
         </InputContainer>

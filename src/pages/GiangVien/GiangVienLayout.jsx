@@ -59,11 +59,6 @@ function GiangVienLayout() {
 
   return (
     <AppContainer>
-      {isLoading && (
-        <div className="flex flexCenter g-center w-100 h-100">
-          <Spinner color="var(--color--main_7)" />
-        </div>
-      )}
       {!isLoading && (
         <>
           {activeNav && <GiangVienNavigation setActiveNav={setActiveNav} />}

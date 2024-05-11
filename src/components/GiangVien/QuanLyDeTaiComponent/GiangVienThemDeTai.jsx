@@ -113,6 +113,10 @@ function GiangVienThemDeTai() {
   });
   function themDeTaiHandler(data) {
     const maGiangVien = thongTinNguoiDung.maGiangVien + "";
+    if (data.danhMuc === "" || data.loai === "") {
+      toast.error("Vui lòng chọn loại và danh mục đề tài");
+      return;
+    }
     if (dt) {
       console.log(data);
 
@@ -190,7 +194,9 @@ function GiangVienThemDeTai() {
             </InputContainer>
             <DoubleContainer>
               <InputContainer>
-                <InputContainer.Select register={{ ...register("loai") }}>
+                <InputContainer.Select
+                  register={{ ...register("loai", { require: true }) }}
+                >
                   <option value="">Loại đề tài</option>
                   <option value="0">Cao đẳng</option>
                   <option value="1">Đại học</option>
@@ -198,7 +204,7 @@ function GiangVienThemDeTai() {
               </InputContainer>
               <InputContainer>
                 <InputContainer.Select
-                  register={{ ...register("danhMuc", { require: "True" }) }}
+                  register={{ ...register("danhMuc", { require: true }) }}
                 >
                   <option value="">Danh mục đề tài</option>
                   {danhSachDanhMuc?.map((dm) => (

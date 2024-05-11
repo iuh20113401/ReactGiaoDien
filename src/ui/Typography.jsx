@@ -42,6 +42,10 @@ export const H5 = styled.h5`
 `;
 export const H6 = styled.h6`
   font-size: 1.5rem;
+  @media screen and (max-width: 400px) {
+    font: 1.2rem;
+  }
+
   ${({ color }) =>
     color &&
     css`

@@ -17,6 +17,9 @@ const variations = {
     background-color: #fff;
     border-bottom: 2px solid var(--color--secondary_4);
     box-shadow: 0 0rem 0.5rem rgba(0, 0, 0, 0.1);
+    @media screen and (max-width: 400px) {
+      grid-template-columns: 1fr 9fr 3fr;
+    }
   `,
 };
 const Navigation = styled.div`

@@ -20,7 +20,6 @@ const NavFooter = styled.div`
   display: flex;
   gap: 1.6rem;
   align-items: center;
-
   height: auto;
   width: 100%;
   ${(props) => props?.variation && variations[props.variation]}

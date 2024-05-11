@@ -10,6 +10,9 @@ const variations = {
     width: 80%;
     flex-direction: row;
     justify-content: space-between;
+    @media screen and (max-width: 400px) {
+      width: 90%;
+    }
   `,
 };
 const MenuItems = styled.ul`

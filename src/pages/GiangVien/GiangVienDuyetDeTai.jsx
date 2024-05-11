@@ -69,6 +69,19 @@ function GiangVienDuyetDeTai() {
       return isSearchTen && giangvien;
     });
   }, [data, searchParam, searchTen]);
+  const danhSachGiangVien = data?.reduce((acc, curr) => {
+    if (acc.find((a) => a.maGiangVien === curr.maGiangVien)) return acc;
+    acc.push({
+      maGiangVien: curr.maGiangVien,
+      giangVienHuongDan: curr.giangVienHuongDan,
+    });
+    return acc;
+  }, []);
+  const danhMucDeTai = DanhSachDeTai?.reduce((acc, curr) => {
+    if (acc.find((a) => a.danhMuc === curr.danhMuc)) return acc;
+    acc.push({ danhMuc: curr.danhMuc, tenDanhMuc: curr.tenDanhMuc });
+    return acc;
+  }, []);
   return (
     !isLoading && (
       <>
@@ -94,16 +107,19 @@ function GiangVienDuyetDeTai() {
                 onChange={(e) => SetParam("giangvien", e.target.value)}
               >
                 <option value="">Theo giảng viên</option>
-                <option value="2011340341">Trần Thị Kim Chi</option>
-                <option value="2011340342">Huỳnh Nam</option>
-                <option value="2011340343">Võ Ngọc Tấn Phước</option>
+                {danhSachGiangVien?.map((gv) => (
+                  <option key={gv.maGiangVien} value={`${gv.maGiangVien}`}>
+                    {gv.giangVienHuongDan}
+                  </option>
+                ))}
               </InputContainer.Select>
               <InputContainer.Select size="block">
                 <option value="0">Theo danh mục</option>
-                <option value="">Thực hành</option>
-                <option value="">Nghiên cứu</option>
-                <option value="">ERP</option>
-                <option value="">Javascript</option>
+                {danhMucDeTai?.map((dt) => (
+                  <option key={dt.maDanhMuc} value={`${dt.danhMuc}`}>
+                    {dt.tenDanhMuc}
+                  </option>
+                ))}
               </InputContainer.Select>
               <InputContainer.Select size="block">
                 <option value="">Theo trạng thái</option>
@@ -157,7 +173,7 @@ function GiangVienDuyetDeTai() {
                   </Col3>
                   <Col2 className="g-center">
                     <P2 size="1.4">
-                      <strong>Tag</strong>
+                      <strong>Danh mục đề tài</strong>
                     </P2>
                   </Col2>
                   <Col></Col>
