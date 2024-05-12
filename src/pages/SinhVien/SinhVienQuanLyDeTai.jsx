@@ -33,6 +33,11 @@ const TitleMain = styled.div``;
 const TitleSubtitle = styled.div`
   display: flex;
   gap: 2.4rem;
+  @media screen and (max-width: 400px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    row-gap: 0.8rem;
+  }
 `;
 const TitleOverview = styled.div`
   width: 100%;
@@ -87,7 +92,7 @@ function SinhVienQuanLyDeTai() {
           <TitleOverview>
             <Figure>
               <img
-                src={Logo}
+                src={DoAn.hinhanh || Logo}
                 width={"100%"}
                 height={"100%"}
                 alt="logo of iuh"

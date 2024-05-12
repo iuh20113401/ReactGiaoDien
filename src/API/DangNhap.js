@@ -3,7 +3,7 @@ import Cookies from "universal-cookie";
 export async function dangNhap({ taiKhoan, matKhau, thoiGian }) {
   try {
     const response = await fetch(
-      "https://3.26.182.86/server-main/api/dangNhap.php?action=dangNhap",
+      "https://54.206.45.242/server-main/api/dangNhap.php?action=dangNhap",
       {
         method: "POST",
         headers: {
@@ -28,7 +28,7 @@ export async function layThongTin(thongTin) {
   const cookie = new Cookies();
   const token = cookie.get("token");
   const response = await fetch(
-    "https://3.26.182.86/server-main/api/dangNhap.php?action=layThongTin",
+    "https://54.206.45.242/server-main/api/dangNhap.php?action=layThongTin",
     {
       method: "POST",
       headers: {

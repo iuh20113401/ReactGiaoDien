@@ -76,8 +76,8 @@ function HuongDan() {
           <img
             src={NothingHere}
             alt="NOthing here "
-            width={"1000rem"}
-            height={"1000rem"}
+            width={"100%"}
+            height={"100%"}
           />
         </NoiDungHuongDanContainer>
       )}

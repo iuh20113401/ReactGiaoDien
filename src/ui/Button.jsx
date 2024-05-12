@@ -64,6 +64,9 @@ const buttonStyles = css`
   }
   ${({ size }) => size !== "" && buttonSizes[size]}
   ${({ state }) => state && buttonState[state]}
+  @media screen and (max-width: 400px) {
+    font-size: 1rem;
+  }
 `;
 
 export const Button = styled.button`

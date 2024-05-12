@@ -209,7 +209,9 @@ function DanhSachDeTaiList({ danhSachDeTai, onClick }) {
   );
 }
 function DanhSachDoAnContainer({ danhSachDeTai }) {
-  return danhSachDeTai.map((dt) => <ChiTietDeTai dt={dt} />);
+  return danhSachDeTai.map(
+    (dt) => dt.soLuongDoAn < 2 && <ChiTietDeTai dt={dt} />
+  );
 }
 
 function ChiTietDeTai({ dt }) {

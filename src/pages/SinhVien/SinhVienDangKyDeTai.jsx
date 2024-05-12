@@ -115,6 +115,10 @@ function SinhVienDangKyDeTai() {
   const [selectedGiangVien, setSelectedGiangVien] = useState([]);
   const [filterOpen, setFilterOpen] = useState(false);
   function handlingChange(field = "sortby", value) {
+    console.log(value);
+    if (value === "" || value === null) {
+      searchParams.delete(field);
+    }
     searchParams.set(field, value);
     setSearchParams(searchParams);
   }
@@ -158,7 +162,7 @@ function SinhVienDangKyDeTai() {
     }, []);
   const danhSachDanhMuc =
     !isLoading &&
-    data.reduce((acc, curr) => {
+    DanhSachDeTaiDangKy.reduce((acc, curr) => {
       return acc.find((a) => a.maDanhMuc === curr.danhMuc)
         ? acc
         : [...acc, { maDanhMuc: curr.danhMuc, tenDanhMuc: curr.tenDanhMuc }];
@@ -238,12 +242,17 @@ function SinhVienDangKyDeTai() {
             <FilterDiv>
               <FilterTitle>Theo danh mục đề tài</FilterTitle>
               {danhSachDanhMuc?.map((dm) => (
-                <InputContainer type="checkbox">
-                  <InputContainer.Radio
+                <InputContainer type="checkbox" key={dm.maDanhMuc}>
+                  <InputContainer.Checkbox
                     id={dm.maDanhMuc}
                     name={"danhmuc"}
                     color="var(--color--green_8 )"
-                    onClick={() => handlingChange("danhmuc", dm.maDanhMuc)}
+                    onChange={(e) =>
+                      handlingChange(
+                        "danhmuc",
+                        e.target.checked ? dm.maDanhMuc : ""
+                      )
+                    }
                   />
                   <InputContainer.Label>{dm.tenDanhMuc}</InputContainer.Label>
                 </InputContainer>

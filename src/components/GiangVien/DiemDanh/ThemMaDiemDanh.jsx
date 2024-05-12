@@ -30,7 +30,7 @@ export function ThemMaDiemDanh({ setActive }) {
         <div className="flex flexCenter g-center h-100">
           <AttendanceQRCode
             data={{
-              url: `http://localhost:5173/sinhvien/diemdanh`,
+              url: `https://main.d22mhlisx5ycss.amplifyapp.com/sinhvien/diemdanh`,
               content: { maDiemDanh: data },
             }}
           />
