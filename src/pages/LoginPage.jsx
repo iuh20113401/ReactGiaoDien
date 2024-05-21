@@ -14,6 +14,7 @@ import { Button, ButtonWithIcons } from "../ui/Button";
 import { dangNhap } from "../API/DangNhap";
 import { Spinner } from "../ui/Spinner";
 import Logo from "../../public/hinhanh/Mobile_login-rafiki.svg";
+import useLocalStorage from "../hooks/useLocalStorage";
 const LoginCOntainer = styled.section`
   width: 100%;
   height: 100vh;
@@ -41,14 +42,25 @@ const Image = styled.img`
 `;
 function LoginPage() {
   const navigate = useNavigate();
-  const cookies = new Cookies();
+  const [_, setValue] = useLocalStorage({
+    initialValue: false,
+    key: "token",
+  });
+  const [user, setUser] = useLocalStorage({
+    initialValue: null,
+    key: "user",
+  });
   const [rememberMe, setRememberMe] = useState(false);
   useEffect(() => {
-    const userCookie = cookies.get("user");
-    if (userCookie?.taiKhoan) {
-      navigateToHome(userCookie.vaiTro);
+    function navigateToHome(vaiTro) {
+      if (vaiTro === 0) navigate("/sinhVien");
+      if (vaiTro > 0) navigate("/giangVien");
     }
-  }, []);
+
+    if (user?.taiKhoan) {
+      navigateToHome(user.vaiTro);
+    }
+  }, [navigate, user]);
   const {
     register,
     handleSubmit,
@@ -57,27 +69,21 @@ function LoginPage() {
   const { mutate, isLoading } = useMutation({
     mutationFn: dangNhap,
     onSuccess: (data) => {
-      const cookieOptions = rememberMe
+      const timeOption = rememberMe
         ? { path: "/", maxAge: 259200 }
         : { path: "/", maxAge: 3600 };
-      cookies.set(
-        "user",
-        { taiKhoan: data.MaTaiKhoan, vaiTro: data.VaiTro },
-        cookieOptions
-      );
-      cookies.set("token", data.token, cookieOptions);
-      navigateToHome(data.VaiTro);
+
+      setValue({
+        token: data.token,
+        expire: new Date().getTime() + timeOption.maxAge * 1000,
+      });
+      setUser({ taiKhoan: data.MaTaiKhoan, vaiTro: data.VaiTro });
       toast.success("Đăng nhập thành công");
     },
     onError: (error) => {
       toast.error("Đăng nhập thất bại: " + error.message);
     },
   });
-
-  function navigateToHome(vaiTro) {
-    if (vaiTro === 0) navigate("/sinhVien");
-    if (vaiTro > 0) navigate("/giangVien");
-  }
 
   function loginSubmit(data) {
     const { taiKhoan, matKhau, ghinho } = data;

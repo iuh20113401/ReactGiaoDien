@@ -11,6 +11,7 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import Cookies from "universal-cookie";
+import { DarkModeProvider } from "./contexts/DarkModeContext.jsx";
 
 const Loading = React.lazy(() => import("./pages/Loading.jsx"));
 const LoginPage = React.lazy(() => import("./pages/LoginPage.jsx"));
@@ -92,11 +93,10 @@ function AutoLoginRedirect() {
   const navigate = useNavigate();
   const location = useLocation(); // This hook provides access to the location object
   useEffect(() => {
-    const cookies = new Cookies();
-    const userCookie = cookies.get("user");
-    if (userCookie) {
-      if (userCookie && userCookie?.vaiTro !== undefined) {
-        const targetPath = determineTargetPath(userCookie?.vaiTro);
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      if (user && user?.vaiTro !== undefined) {
+        const targetPath = determineTargetPath(user?.vaiTro);
         if (location.pathname !== targetPath) {
           navigate(targetPath);
         }
@@ -123,7 +123,7 @@ function AutoLoginRedirect() {
 }
 function App() {
   return (
-    <Fragment>
+    <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
         <GlobalStyles />
         <ReactQueryDevtools initialIsOpen={false} />
@@ -234,7 +234,7 @@ function App() {
           }}
         />
       </QueryClientProvider>
-    </Fragment>
+    </DarkModeProvider>
   );
 }
 

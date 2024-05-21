@@ -25,7 +25,7 @@ const OverviewLeft = styled.aside`
 `;
 const OverviewSummary = styled.div`
   width: 100%;
-  background-color: #fff;
+  background-color: var(--color--white);
   box-shadow: 0rem 0.5rem 1rem rgba(0, 0, 0, 0.1);
   padding: 1.6rem;
   border-radius: 0.6rem;
@@ -99,7 +99,7 @@ const FileIcon = styled.figure`
 `;
 const OverviewComment = styled.div`
   width: 100%;
-  background-color: #fff;
+  background-color: var(--color--white);
   box-shadow: 0rem 1rem 2rem rgba(0, 0, 0, 0.1);
   padding: 1.6rem;
   border-radius: 0.6rem;

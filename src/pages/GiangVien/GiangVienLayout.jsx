@@ -7,7 +7,6 @@ import GiangVienNavigation from "../../components/GiangVien/GiangVienNavigation"
 import MainHeader from "./MainHeader";
 import Main from "./Main";
 import UseThongTinTaiKhoan from "../../hooks/UseThongTinTaiKhoan";
-import { Spinner } from "../../ui/Spinner";
 
 const AppContainer = styled.div`
   display: flex;

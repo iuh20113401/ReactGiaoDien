@@ -14,6 +14,7 @@ import { layDanhSachDeTai } from "../../API/giangVien/DeTai";
 import UseThongTinTaiKhoan from "../../hooks/UseThongTinTaiKhoan";
 import { DanhSachDeTaiContainer } from "../../components/GiangVien/QuanLyDeTaiComponent/DanhSachDeTaiContainer";
 import Loading from "../Loading";
+import Filter from "../../components/GiangVien/Filter/Filter";
 
 const QuanLyDeTaiSection = styled.section`
   display: flex;
@@ -25,7 +26,7 @@ const Container = styled.article`
   width: 100%;
   height: auto;
   padding: 1.6rem;
-  background-color: #fff;
+  background-color: var(--color--white);
   box-shadow: 0 0rem 1rem rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -72,19 +73,14 @@ export const TrangThai = [
 
 function GiangVienQuanLyDeTai() {
   const { data: thongTinNguoiDung } = UseThongTinTaiKhoan();
-  const { data, isLoading, error, refetch } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["deTai"],
     queryFn: () => layDanhSachDeTai(thongTinNguoiDung.maGiangVien),
   });
   const navigate = useNavigate();
   const [active, setActive] = useState(null);
   const [searchValue, setSearchValue] = useState("");
-  const [searchParam, setSearchParam] = useSearchParams();
-  const trangThai = searchParam.get("trangthai") || null;
-  function TimKiem(field, value) {
-    searchParam.set(field, value);
-    setSearchParam(searchParam);
-  }
+  const [searchParam] = useSearchParams();
 
   const DanhSachDeTai = useMemo(() => {
     if (!data || !data.length) return [];
@@ -97,7 +93,7 @@ function GiangVienQuanLyDeTai() {
     return data.filter((dt) => {
       return (
         (!status ||
-          +trangThai === 0 ||
+          +status === 0 ||
           dt.TrangThai === TrangThai[status - 1]?.ten) &&
         (!skills ||
           skills === "" ||
@@ -106,7 +102,7 @@ function GiangVienQuanLyDeTai() {
             .includes(skills))
       );
     });
-  }, [data, searchValue, trangThai, searchParam]);
+  }, [data, searchValue, searchParam]);
   return (
     <>
       {isLoading && <Loading size={8.4} color="var(--color--main_7)" />}
@@ -139,27 +135,21 @@ function GiangVienQuanLyDeTai() {
               />
             </InputContainer>
             <InputContainer type="horizontal" gap="2.4">
-              <InputContainer.Select
-                size="block"
-                onChange={(e) => TimKiem("trangthai", e.target.value)}
-              >
+              <Filter field={"trangthai"}>
                 <option value="0">Theo trạng thái</option>
                 {TrangThai.map((tt, index) => (
                   <option key={index} value={index + 1}>
                     {tt.ten}
                   </option>
                 ))}
-              </InputContainer.Select>
-              <InputContainer.Select
-                size="block"
-                onChange={(e) => TimKiem("kynang", e.target.value)}
-              >
+              </Filter>
+              <Filter field={"kynang"}>
                 <option value="">Chọn theo kỹ năng yêu cầu</option>
                 <option value="HTML">HTML</option>
                 <option value="CSS">CSS</option>
                 <option value="Javascript">Javascript</option>
                 <option value="Phân tích yêu cầu">Phân tích yêu cầu</option>
-              </InputContainer.Select>
+              </Filter>
             </InputContainer>
           </Container>
           <div className="mt-2">

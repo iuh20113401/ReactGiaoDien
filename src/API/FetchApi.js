@@ -1,4 +1,9 @@
 export default async function fetchApi(url, options) {
+  const token = JSON.parse(localStorage.getItem("token"))?.token || "";
+  options.headers = {
+    ...options.headers,
+    Authorization: `${token}`,
+  };
   try {
     const response = await fetch(url, options);
     const data = await response.json();

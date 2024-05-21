@@ -78,7 +78,7 @@ function ChiTietDeTai({ dt, setActive, refetch }) {
           size="sm"
           icon={<HiEye />}
           bgcolor="var(--color--main_7)"
-          color="#fff"
+          color="var(--color--white)"
           content="Xem chi tiết"
           tcolor="true"
           direction="top"
@@ -91,7 +91,7 @@ function ChiTietDeTai({ dt, setActive, refetch }) {
           size="sm"
           icon={<HiEye />}
           bgcolor="var(--color--green_7)"
-          color="#fff"
+          color="var(--color--white)"
           content="Sửa thông tin"
           tcolor="true"
           direction="top"
@@ -104,7 +104,7 @@ function ChiTietDeTai({ dt, setActive, refetch }) {
           size="sm"
           icon={<HiEye />}
           bgcolor="var(--color--red_6)"
-          color="#fff"
+          color="var(--color--white)"
           content="Xóa"
           tcolor="true"
           direction="top"

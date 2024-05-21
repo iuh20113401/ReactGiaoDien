@@ -6,7 +6,10 @@ import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 
 import UseThongTinTaiKhoan from "../../../hooks/UseThongTinTaiKhoan";
-import { themLichHopVaoDeTai } from "../../../API/giangVien/DeTai";
+import {
+  themLichHopVaoDeTai,
+  themLichHopVaoDoAn,
+} from "../../../API/giangVien/DeTai";
 import { P2 } from "../../../ui/Typography";
 import { Button } from "../../../ui/Button";
 import CanvaContainer from "../../../ui/Canvas";
@@ -15,19 +18,29 @@ import { InputContainer } from "../../../ui/Input";
 import { layDanhSachDeTaiDaDangKy } from "../../../API/giangVien/DeTai";
 import { Spinner } from "../../../ui/Spinner";
 import Table, { Col, Col3, Col5, Row, TieuDe } from "../../../ui/Table";
+import { DanhSachDoAn } from "../RightContent/DanhSachDoAn";
 
-export function ThemLichHop({ setActive }) {
+export function ThemLichHop({ setActive, refetch }) {
   const [hinhThuc, setHinhThuc] = useState("");
   let modal = false;
 
   const { register, handleSubmit, formState, reset } = useForm();
   const { errors } = formState;
-  const { mutate, isPending } = useMutation({
-    mutationFn: themLichHopVaoDeTai,
+  const { mutate, isLoading } = useMutation({
+    mutationFn: (data) => {
+      data.selectedTopics = data.selectedTopics.filter(
+        (item) => item !== "all"
+      );
+      return hinhThuc === "dt"
+        ? themLichHopVaoDeTai(data)
+        : themLichHopVaoDoAn(data);
+    },
     onSuccess: () => {
       toast.success("Thêm lịch họp thành công");
       reset();
       setHinhThuc("");
+      setActive(false);
+      refetch();
     },
     onError: (error) => toast.error("Thêm lịch họp thất bại"),
   });
@@ -42,6 +55,9 @@ export function ThemLichHop({ setActive }) {
 
   if (hinhThuc === "dt") {
     modal = <Danhsachdetai register={register} />;
+  }
+  if (hinhThuc === "da") {
+    modal = <DanhSachDoAn register={register} />;
   }
   return (
     <CanvaContainer

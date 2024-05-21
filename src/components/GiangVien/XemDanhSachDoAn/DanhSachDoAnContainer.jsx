@@ -14,9 +14,6 @@ import {
 } from "../../../pages/GiangVien/GiangVienXemDanhSachDoAn";
 import Logo from "../../../../public/hinhanh/iuh_logo_2.png";
 export function DanhSachDoAnContainer({ DanhSachDoAn }) {
-  const { data: thongTinNguoiDung } = useQuery({
-    queryKey: ["thongTinTaiKhoan"],
-  });
   const navigate = useNavigate();
   function xemChiTiet(maDoAn) {
     navigate(`chitietdoan?maDoAn=${maDoAn}`);
@@ -25,7 +22,7 @@ export function DanhSachDoAnContainer({ DanhSachDoAn }) {
     return (
       <DoAnContainer>
         <DoAnLeft>
-          <img src={da.HinhAnh || { Logo }} alt="Hình ảnh đề tài" />
+          <img src={da.hinhanh || { Logo }} alt="Hình ảnh đề tài" />
         </DoAnLeft>
         <DoAnRight>
           <P2 size="1.6" className="bold">

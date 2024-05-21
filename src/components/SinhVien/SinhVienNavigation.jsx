@@ -20,6 +20,8 @@ import { H6 } from "../../ui/Typography";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from "../../ui/Button";
 import Cookies from "universal-cookie";
+import dangXuat from "../../hooks/useDangXuat";
+import useDangXuat from "../../hooks/useDangXuat";
 const LogoBox = styled.div`
   width: 15%;
   height: 100%;
@@ -28,12 +30,8 @@ const LogoBox = styled.div`
 function SinhVienNavigation() {
   const { data } = useQuery({ queryKey: ["thongTinTaiKhoan"] });
   const { trangThaiSinhVien } = data;
-  const cookie = new Cookies();
-  const dangXuat = () => {
-    cookie.remove("token");
-    cookie.remove("user");
-    window.location.replace("/");
-  };
+  const dangXuat = useDangXuat();
+
   return (
     <Navigation variation="sinhVien">
       <LogoBox>

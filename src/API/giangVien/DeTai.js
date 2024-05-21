@@ -43,6 +43,7 @@ export async function capNhatAnhDaiDien(thongTin) {
 export async function themDeTai(formData) {
   const url = `${BASE_URL}?resource=deTai`;
   // const headers = { "Content-Type": "application/json" };
+  const body = formData?.hinhanh ? formData : JSON.stringify(formData);
   return fetchApi(url, {
     method: "POST",
     body: formData,
@@ -50,11 +51,9 @@ export async function themDeTai(formData) {
 }
 export async function themHuongDan(huongDan) {
   const url = `${BASE_URL}?resource=huongDan`;
-  const headers = { "Content-Type": "application/json" };
   const body = JSON.stringify(huongDan);
   return fetchApi(url, {
     method: "POST",
-    headers,
     body,
   });
 }
@@ -74,6 +73,14 @@ export async function themHuongDanVaoDoAn(huongDan) {
 }
 export async function themLichHopVaoDeTai(lichHop) {
   const url = `${BASE_URL}?resource=lichHop`;
+  const body = JSON.stringify(lichHop);
+  return fetchApi(url, {
+    method: "POST",
+    body,
+  });
+}
+export async function themLichHopVaoDoAn(lichHop) {
+  const url = `${BASE_URL}?resource=lichHopDoAn`;
   const body = JSON.stringify(lichHop);
   return fetchApi(url, {
     method: "POST",

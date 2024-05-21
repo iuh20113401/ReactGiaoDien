@@ -13,6 +13,7 @@ import {
   DanhSachDeTaiContainer,
   ChiTietDeTai,
 } from "../../components/GiangVien/DanhSachDeTaiContainer";
+import Filter from "../../components/GiangVien/Filter/Filter";
 
 const DuyetDeTaiContainer = styled.section`
   display: flex;
@@ -24,7 +25,7 @@ const Container = styled.article`
   width: 100%;
   height: auto;
   padding: 1.6rem;
-  background-color: #fff;
+  background-color: var(--color--white);
   box-shadow: 0 0rem 1rem rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -47,19 +48,12 @@ export const IconDiv = styled.span`
 
 function GiangVienDuyetDeTai() {
   const [active, setActive] = useState(null);
-  const { data, isLoading, error, refetch } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["danhSachDeTaiChoDuyet"],
     queryFn: layDanhSachDeTaiChoDuyet,
   });
   const [searchTen, setSearchTen] = useState("");
-  const [searchParam, setSearchParam] = useSearchParams();
-  const SetParam = useCallback(
-    (field, value) => {
-      searchParam.set(field, value);
-      setSearchParam(searchParam);
-    },
-    [searchParam, setSearchParam]
-  );
+  const [searchParam] = useSearchParams();
   const DanhSachDeTai = useMemo(() => {
     return data?.filter((dt) => {
       const isSearchTen = searchTen ? dt.tenDeTai.includes(searchTen) : true;
@@ -102,25 +96,22 @@ function GiangVienDuyetDeTai() {
               />
             </InputContainer>
             <InputContainer type="horizontal" gap="2.4">
-              <InputContainer.Select
-                size="block"
-                onChange={(e) => SetParam("giangvien", e.target.value)}
-              >
+              <Filter field={"giangvien"}>
                 <option value="">Theo giảng viên</option>
                 {danhSachGiangVien?.map((gv) => (
                   <option key={gv.maGiangVien} value={`${gv.maGiangVien}`}>
                     {gv.giangVienHuongDan}
                   </option>
                 ))}
-              </InputContainer.Select>
-              <InputContainer.Select size="block">
+              </Filter>
+              <Filter field={"danhmuc"}>
                 <option value="0">Theo danh mục</option>
                 {danhMucDeTai?.map((dt) => (
                   <option key={dt.maDanhMuc} value={`${dt.danhMuc}`}>
                     {dt.tenDanhMuc}
                   </option>
                 ))}
-              </InputContainer.Select>
+              </Filter>
               <InputContainer.Select size="block">
                 <option value="">Theo trạng thái</option>
                 <option value="0">Chờ duyệt</option>

@@ -1,5 +1,3 @@
-import Cookies from "universal-cookie";
-
 export async function dangNhap({ taiKhoan, matKhau, thoiGian }) {
   try {
     const response = await fetch(
@@ -25,8 +23,7 @@ export async function dangNhap({ taiKhoan, matKhau, thoiGian }) {
   }
 }
 export async function layThongTin(thongTin) {
-  const cookie = new Cookies();
-  const token = cookie.get("token");
+  const { token } = JSON.parse(localStorage.getItem("token"));
   const response = await fetch(
     "https://54.206.45.242/server-main/api/dangNhap.php?action=layThongTin",
     {

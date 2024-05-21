@@ -26,7 +26,7 @@ const Container = styled.article`
   width: 100%;
   height: auto;
   padding: 1.6rem;
-  background-color: #fff;
+  background-color: var(--color--white);
   box-shadow: 0 0rem 1rem rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;

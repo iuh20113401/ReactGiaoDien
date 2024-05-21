@@ -37,6 +37,7 @@ const LichHop = () => {
     data: events,
     isLoading,
     error,
+    refetch,
   } = useQuery({
     queryKey: ["lichHop"],
     queryFn: () =>
@@ -109,7 +110,7 @@ const LichHop = () => {
           }}
         />
       </Container>
-      {active && <ThemLichHop setActive={setActive} />}
+      {active && <ThemLichHop setActive={setActive} refetch={refetch} />}
     </LichHopContainer>
   );
 };

@@ -27,7 +27,7 @@ const TaiLieuContainer = styled.article`
 
 const TaiLieuTitle = styled.div`
   width: 100%;
-  background-color: #fff;
+  background-color: var(--color--white);
   padding: 0.8rem 1.6rem;
   box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.1);
   border-radius: 0.3rem;
@@ -35,7 +35,7 @@ const TaiLieuTitle = styled.div`
 const TableContent = styled.div`
   width: 100%;
   height: auto;
-  background-color: #fff;
+  background-color: var(--color--white);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   padding: 0.8rem 1.6rem;
   border-radius: 0.3rem;
@@ -59,7 +59,7 @@ const Container = styled.article`
   width: 100%;
   height: auto;
   padding: 1.6rem;
-  background-color: #fff;
+  background-color: var(--color--white);
   box-shadow: 0 0rem 1rem rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;

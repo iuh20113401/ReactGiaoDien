@@ -39,7 +39,7 @@ const Canva = styled.div`
   top: 0;
   bottom: 0;
   right: 0;
-  background-color: #fff;
+  background-color: var(--color--white);
   z-index: 999;
   overflow: scroll;
   animation: ${CanvaAnimation} 0.2s linear;

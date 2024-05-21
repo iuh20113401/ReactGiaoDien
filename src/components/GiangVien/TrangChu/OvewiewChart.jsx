@@ -19,7 +19,7 @@ const OverviewContainer = styled.div`
     flex-direction: column;
     gap: 1.6rem;
     border-radius: 0.6rem;
-    background-color: #fff;
+    background-color: var(--color--white);
   }
 `;
 const LargeContainer = styled.div`

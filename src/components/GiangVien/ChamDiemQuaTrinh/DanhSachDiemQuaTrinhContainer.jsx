@@ -56,10 +56,27 @@ function ChiTietSinhVien({ sv, refetch, index }) {
   }, []);
   function setDiemGiuaKyHandler(e, maSinhVien) {
     e.preventDefault();
+    if (isDiemGiuaKy === "") {
+      toast.error("Vui lòng nhập điểm");
+      return;
+    }
+    if (isDiemGiuaKy < 0 || isDiemGiuaKy > 10) {
+      toast.error("Vui lòng nhập điểm từ 0 đến 10");
+      return;
+    }
+
     diemGiuaKyMutate({ maSinhVien, diem: isDiemGiuaKy });
   }
   function setDiemCuoiKyHandler(e, maSinhVien) {
     e.preventDefault();
+    if (isDiemCuoiKy === "") {
+      toast.error("Vui lòng nhập điểm");
+      return;
+    }
+    if (isDiemCuoiKy < 0 || isDiemCuoiKy > 10) {
+      toast.error("Vui lòng nhập điểm từ 0 đến 10");
+      return;
+    }
     diemCuoiKyMutate({ maSinhVien, diem: isDiemCuoiKy });
   }
   return (

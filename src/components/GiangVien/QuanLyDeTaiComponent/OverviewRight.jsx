@@ -13,7 +13,7 @@ const OverviewRight = styled.aside`
 export const Container = styled.div`
   width: 100%;
   height: auto;
-  background-color: #fff;
+  background-color: var(--color--white);
   padding: 1.6rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   display: flex;

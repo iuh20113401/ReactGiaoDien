@@ -1,15 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import { HiMenu, HiMoon } from "react-icons/hi";
+import { HiMenu } from "react-icons/hi";
 import { Button } from "../../ui/Button";
 import Cookies from "universal-cookie";
 import { NavLink } from "react-router-dom";
 import UseThongTinTaiKhoan from "../../hooks/UseThongTinTaiKhoan";
+import ToogleDarkMode from "../../components/GiangVien/MainHeader/ToogleDarkMode";
+import dangXuat from "../../hooks/useDangXuat";
+import useDangXuat from "../../hooks/useDangXuat";
 
 const Container = styled.div`
   width: 95%;
   height: 6rem;
-  background-color: #fff;
+  background-color: var(--color--white);
   margin: auto;
   box-shadow: 0rem 0.3rem 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
   border-radius: 0.6rem;
@@ -49,7 +52,7 @@ const Dropdown = styled.div`
   height: fit-content;
   top: 100%;
   right: -40%;
-  background-color: #fff;
+  background-color: var(--color--white);
   box-shadow: 0rem 0.3rem 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
   & > div {
     padding: 0 0.8rem;
@@ -61,13 +64,7 @@ const Dropdown = styled.div`
 `;
 function MainHeader({ setActiveNav }) {
   const { data } = UseThongTinTaiKhoan();
-  const cookie = new Cookies();
-  const dangXuat = (e) => {
-    e.preventDefault();
-    cookie.remove("token");
-    cookie.remove("user");
-    window.location.replace("/");
-  };
+  const dangXuat = useDangXuat();
   return (
     <Container>
       <div className="flex flexCenter g-spaceBetween">
@@ -80,14 +77,7 @@ function MainHeader({ setActiveNav }) {
           <HiMenu size="2.4rem" />
         </Button>
         <div className="flex flexCenter g-spaceBetween ">
-          <Button
-            size="xs"
-            bgcolor="transparent"
-            color="var(--color--secondary_8)"
-            shadow="none"
-          >
-            <HiMoon size="2.4rem" />
-          </Button>
+          <ToogleDarkMode />
           <AvatarBox>
             <Avatar>
               <img

@@ -31,7 +31,7 @@ const Container = styled.article`
   width: 100%;
   height: auto;
   padding: 1.6rem;
-  background-color: #fff;
+  background-color: var(--color--white);
   box-shadow: 0 0rem 1rem rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -118,14 +118,11 @@ function GiangVienThemDeTai() {
       return;
     }
     if (dt) {
-      console.log(data);
-
       suaMutate(data);
     } else {
       const maDeTai =
         Math.floor(Math.random() * (9999 - 0) + 0).toString() +
         maGiangVien.slice(-4);
-
       const formData = new FormData();
       formData.append("maGiangVien", maGiangVien);
       formData.append("maDeTai", maDeTai);
@@ -136,11 +133,10 @@ function GiangVienThemDeTai() {
       formData.append("loai", data.loai);
       formData.append("danhMuc", data.danhMuc);
       formData.append("tag", data.tag);
-
       if (data["hinhanh"]) {
         formData.append("hinhanh", data["hinhanh"][0]); // Assumes 'file' is the File object from input type=file
       }
-      themMutate(formData);
+      themMutate(data["hinhanh"] ? formData : data);
     }
   }
   const isLoading = themLoading || danhMucLoading;

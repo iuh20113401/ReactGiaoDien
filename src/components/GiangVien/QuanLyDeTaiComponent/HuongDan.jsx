@@ -20,14 +20,14 @@ const HuongDanContainer = styled.article`
 `;
 const HuongDanTitle = styled.div`
   width: 100%;
-  background-color: #fff;
+  background-color: var(--color--white);
   padding: 0.8rem 1.6rem;
   box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.1);
   border-radius: 0.3rem;
 `;
 const NoiDungHuongDanContainer = styled.div`
   width: 100%;
-  background-color: #fff;
+  background-color: var(--color--white);
   padding: 0.8rem 1.6rem;
   box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.1);
   display: flex;

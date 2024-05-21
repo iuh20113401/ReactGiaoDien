@@ -24,7 +24,7 @@ const NavigationContainer = styled.div`
   gap: 3.2rem;
   height: 100vh;
   width: 19%;
-  background-color: #fff;
+  background-color: var(--color--white);
   padding: 1.6rem 0.8rem 6rem 1.6rem;
   box-shadow: 0rem 0rem 1rem 0.1rem rgba(0, 0, 0, 0.1);
   z-index: 100;
@@ -65,7 +65,7 @@ const CloseMenu = styled.button`
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: var(--color--white);
   box-shadow: none;
   outline: none;
   border: none;
@@ -118,7 +118,7 @@ const Link = styled(NavLink)`
       var(--color--main_6),
       var(--color--main_5)
     );
-    color: #fff;
+    color: var(--color--white);
     opacity: 0.9;
   }
   & > span:nth-child(3) {
@@ -144,9 +144,7 @@ const DropdownContainer = styled.ul`
 function GiangVienNavigation({ setActiveNav }) {
   const [isListVisible, setIsListVisible] = useState(false);
 
-  const cookies = new Cookies();
-  const cookiesData = cookies.get("user");
-  const { vaiTro } = cookiesData;
+  const { vaiTro } = JSON.parse(localStorage.getItem("user"));
 
   return (
     <NavigationContainer>
