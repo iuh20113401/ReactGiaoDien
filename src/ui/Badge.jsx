@@ -6,6 +6,7 @@ import CardContainer from "./Card";
 
 const Badge = styled.p`
   width: fit-content;
+  font-size: 1.4rem;
   background-color: ${({ bgcolor }) =>
     bgcolor ? `${bgcolor}` : "var(--color--secondary_1)"};
   color: ${({ color }) => (color ? `${color}` : "var(--color--secondary_6)")};

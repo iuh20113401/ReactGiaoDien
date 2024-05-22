@@ -30,7 +30,7 @@ const ModalPosition = {
 export const ModalContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3.2rem;
+  gap: 2.4rem;
   padding: 1.6rem 3.2rem;
   width: fit-content;
   height: fit-content;

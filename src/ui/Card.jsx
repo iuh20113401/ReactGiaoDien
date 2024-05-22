@@ -35,7 +35,7 @@ const Footer = styled.div`
 `;
 const CardContent = styled.div`
   width: 100%;
-  ${({ active }) => (active ? "min-height: 10rem;" : "max-height: 12rem;")}
+  ${({ active }) => (active ? "min-height: 10rem;" : "height: 22rem;")}
   overflow: hidden;
   padding: 0 1.6rem;
   display: flex;
@@ -49,6 +49,15 @@ const CardContent = styled.div`
             cursor: pointer;
           }
         `}
+`;
+const Image = styled.div`
+  width: 100%;
+  height: 15rem;
+  margin-bottom: 1rem;
+  & > img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 function TitleContainer({ children }) {
   return <Title>{children}</Title>;
@@ -69,9 +78,13 @@ function FooterContainer({ children, position = null }) {
 function CardContainer({ children }) {
   return <Card>{children}</Card>;
 }
+function ImageContainer({ children }) {
+  return <Image>{children}</Image>;
+}
 CardContainer.Title = TitleContainer;
 CardContainer.SubTitle = SubTitleContainer;
 CardContainer.Footer = FooterContainer;
 CardContainer.CardContent = CardContentContainer;
+CardContainer.Image = ImageContainer;
 
 export default CardContainer;

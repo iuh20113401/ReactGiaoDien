@@ -129,3 +129,11 @@ export async function xoaDeTai(deTai) {
     body,
   });
 }
+
+export async function suaThongTinGiangVien(giangVien) {
+  const url = `${BASE_URL}?resource=thongTinGiangVien`;
+  return fetchApi(url, {
+    method: "PUT",
+    body: JSON.stringify(giangVien),
+  });
+}

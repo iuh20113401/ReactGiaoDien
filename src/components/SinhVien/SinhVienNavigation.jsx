@@ -17,18 +17,16 @@ import { NavLink } from "react-router-dom";
 
 import Logo from "../../../public/hinhanh/iuh_logo_2.png";
 import { H6 } from "../../ui/Typography";
-import { useQuery } from "@tanstack/react-query";
 import { Button } from "../../ui/Button";
-import Cookies from "universal-cookie";
-import dangXuat from "../../hooks/useDangXuat";
 import useDangXuat from "../../hooks/useDangXuat";
+import UseThongTinTaiKhoan from "../../hooks/UseThongTinTaiKhoan";
 const LogoBox = styled.div`
   width: 15%;
   height: 100%;
   margin: 0.8rem 3.2rem;
 `;
 function SinhVienNavigation() {
-  const { data } = useQuery({ queryKey: ["thongTinTaiKhoan"] });
+  const { data } = UseThongTinTaiKhoan();
   const { trangThaiSinhVien } = data;
   const dangXuat = useDangXuat();
 

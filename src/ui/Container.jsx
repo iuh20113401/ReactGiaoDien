@@ -15,14 +15,12 @@ export const ThreeContainer = styled.article`
   gap: 1.6rem; // Adjust gap as needed
   width: 100%;
   margin-left: 0.8rem;
-  position: relative;
 `;
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1.6rem;
   gap: 3.2rem;
-  position: sticky;
   top: 0;
   overflow: auto;
 `;

@@ -10,10 +10,9 @@ import { H6, PageHeader } from "../../ui/Typography";
 import { IconDiv } from "../../ui/Container";
 import { ButtonWithIcons } from "../../ui/Button";
 import { InputContainer } from "../../ui/Input";
-import { DangKyDeTaiGrid } from "./DangKyDeTaiGrid";
-import DanhSachDeTaiList from "./DangKyDeTaiList";
 import { layDanhSachDeTai } from "../../API/sinhVien/DeTai";
 import { HiX } from "react-icons/hi";
+import DanhSachDeTaiContainer from "./DanhSachDeTaiContainer";
 const DangKyDeTaiSection = styled.section`
   display: flex;
   flex-direction: column;
@@ -213,6 +212,7 @@ function SinhVienDangKyDeTai() {
               <InputContainer type="checkbox">
                 <InputContainer.Checkbox
                   id="select-all-giangvien"
+                  key="all"
                   checked={
                     selectedGiangVien.length === danhSachGiangVien.length &&
                     selectedGiangVien.length !== 0
@@ -228,7 +228,7 @@ function SinhVienDangKyDeTai() {
                 <InputContainer.Label>Chọn tất cả</InputContainer.Label>
               </InputContainer>
               {danhSachGiangVien?.map((dt) => (
-                <InputContainer type="checkbox">
+                <InputContainer type="checkbox" key={dt.maGiangVien}>
                   <InputContainer.Checkbox
                     id={dt.maGiangVien}
                     color="var(--color--secondary_10)"
@@ -246,6 +246,7 @@ function SinhVienDangKyDeTai() {
                   <InputContainer.Checkbox
                     id={dm.maDanhMuc}
                     name={"danhmuc"}
+                    key={dm.maDanhMuc}
                     color="var(--color--green_8 )"
                     onChange={(e) =>
                       handlingChange(
@@ -280,7 +281,7 @@ function SinhVienDangKyDeTai() {
           </FilterAside>
           <DanhSachDeTai>
             {!isLoading && DanhSachDeTaiDangKy && (
-              <DanhSachDeTaiList
+              <DanhSachDeTaiContainer
                 danhSachDeTai={DanhSachDeTaiDangKy}
                 onClick={toggleFilter}
               />

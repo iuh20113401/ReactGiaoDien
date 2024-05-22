@@ -1,15 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 import { P2 } from "../../../ui/Typography";
 import Form from "../../../ui/Form";
 import { InputContainer } from "../../../ui/Input";
 import { DoubleContainer } from "../../../ui/Container";
 import UseThongTinTaiKhoan from "../../../hooks/UseThongTinTaiKhoan";
+import { Button, OutlineButton } from "../../../ui/Button";
+import { set, useForm } from "react-hook-form";
+import { suaThongTinSinhVien } from "../../../API/sinhVien/DeTai";
+import { useMutation } from "@tanstack/react-query";
+import toast from "react-hot-toast";
 
 export function ThongTinCaNhanContainer() {
-  const { data, isLoading, error, isError } = UseThongTinTaiKhoan();
-
+  const { data: thongTinNguoiDung, isLoading } = UseThongTinTaiKhoan();
+  const [isEditing, setIsEditing] = useState(false);
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      hoSinhVien: thongTinNguoiDung.tenSinhVien
+        .split(" ")
+        .slice(0, -1)
+        .join(" "),
+      tenSinhVien: thongTinNguoiDung.tenSinhVien.split(" ").slice(-1).join(" "),
+      soDienThoai: thongTinNguoiDung.soDienThoai,
+      email: thongTinNguoiDung.email,
+      moTa: thongTinNguoiDung.moTa || "Chua có mô tả",
+    },
+  });
+  const { mutate, isLoading: editLoading } = useMutation({
+    mutationFn: suaThongTinSinhVien,
+    onSuccess: () => {
+      toast.success("Cập nhật thông tin thành công");
+      setIsEditing(false);
+    },
+    onError: () => {
+      toast.error("Cập nhật thông tin thất bại");
+    },
+  });
+  function onSubmit(data) {
+    data.maSinhVien = thongTinNguoiDung.maSinhVien;
+    data.hoTen = `${data.hoSinhVien} ${data.tenSinhVien}`;
+    mutate(data);
+  }
+  if (isLoading) return <P2>Loading...</P2>;
   return (
-    <Form center="none">
+    <Form center="none" onSubmit={handleSubmit(onSubmit)}>
       <DoubleContainer>
         <InputContainer>
           <InputContainer.Label htmlFor={"ho"}>
@@ -18,11 +51,8 @@ export function ThongTinCaNhanContainer() {
             </P2>
           </InputContainer.Label>
           <InputContainer.Input
-            defaultValue={`${data.tenSinhVien
-              .split(" ")
-              .slice(0, -1)
-              .join(" ")}`}
-            readOnly={true}
+            register={{ ...register("hoSinhVien") }}
+            readOnly={!isEditing}
           />
         </InputContainer>
         <InputContainer>
@@ -32,8 +62,8 @@ export function ThongTinCaNhanContainer() {
             </P2>
           </InputContainer.Label>
           <InputContainer.Input
-            defaultValue={`${data.tenSinhVien.split(" ").slice(-1).join(" ")}`}
-            readOnly={true}
+            register={{ ...register("tenSinhVien") }}
+            readOnly={!isEditing}
           />
         </InputContainer>
       </DoubleContainer>
@@ -45,9 +75,9 @@ export function ThongTinCaNhanContainer() {
             </P2>
           </InputContainer.Label>
           <InputContainer.Input
-            defaultValue={`${data.soDienThoai}`}
+            register={{ ...register("soDienThoai") }}
             type="number"
-            readOnly={true}
+            readOnly={!isEditing}
           />
         </InputContainer>
         <InputContainer>
@@ -57,8 +87,8 @@ export function ThongTinCaNhanContainer() {
             </P2>
           </InputContainer.Label>
           <InputContainer.Input
-            defaultValue={`${data.email}`}
-            readOnly={true}
+            register={{ ...register("email") }}
+            readOnly={!isEditing}
           />
         </InputContainer>
       </DoubleContainer>
@@ -70,9 +100,9 @@ export function ThongTinCaNhanContainer() {
         </InputContainer.Label>
         <InputContainer.Textarea
           rows={5}
-          defaultValue={`${data.moTa}`}
+          register={{ ...register("moTa") }}
           id="mota"
-          readOnly={true}
+          readOnly={!isEditing}
         />
       </InputContainer>
       <P2>Thông tin sinh viên </P2>
@@ -101,7 +131,9 @@ export function ThongTinCaNhanContainer() {
               Mã số sinh viên
             </P2>
           </InputContainer.Label>
-          <InputContainer.Input defaultValue={`${data.maSinhVien}`} />
+          <InputContainer.Input
+            defaultValue={`${thongTinNguoiDung.maSinhVien}`}
+          />
         </InputContainer>
         <InputContainer>
           <InputContainer.Label htmlFor={"mota"}>
@@ -109,9 +141,36 @@ export function ThongTinCaNhanContainer() {
               Lớp
             </P2>
           </InputContainer.Label>
-          <InputContainer.Input defaultValue={`${data.lop}`} />
+          <InputContainer.Input defaultValue={`${thongTinNguoiDung.lop}`} />
         </InputContainer>
       </DoubleContainer>
+      {!isEditing ? (
+        <Button
+          color="var(--color--secondary_1)"
+          bgcolor="var(--color--main_7)"
+          onClick={() => setIsEditing(true)}
+        >
+          Cập nhật thông tin cá nhân
+        </Button>
+      ) : (
+        <div className="flex mt-2 g-24  g-center">
+          <Button
+            color="var(--color--secondary_1)"
+            bgcolor="var(--color--main_7)"
+            type="submit"
+            disabled={editLoading}
+          >
+            {editLoading ? "Đang cập nhật..." : "Lưu thông tin cá nhân"}
+          </Button>
+          <OutlineButton
+            color="var(--color--main_7)"
+            onClick={() => setIsEditing(false)}
+            disabled={editLoading}
+          >
+            Hủy
+          </OutlineButton>
+        </div>
+      )}
     </Form>
   );
 }

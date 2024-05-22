@@ -261,8 +261,12 @@ function SelectField({ children, size, inputStyle, register, ...props }) {
     </Select>
   );
 }
-function TextareaField({ children, ...props }) {
-  return <Textarea {...props}>{children}</Textarea>;
+function TextareaField({ register, children, ...props }) {
+  return (
+    <Textarea {...props} {...register}>
+      {children}
+    </Textarea>
+  );
 }
 function LabelField({ children, htmlFor, size, className }) {
   return (

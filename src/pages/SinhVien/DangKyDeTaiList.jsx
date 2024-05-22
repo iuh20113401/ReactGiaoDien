@@ -1,14 +1,12 @@
 import React from "react";
 import styled, { css, keyframes } from "styled-components";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { HiFilter, HiSearch } from "react-icons/hi";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { P2 } from "../../ui/Typography";
 import { Button, OutlineButton } from "../../ui/Button";
-import { InputContainer } from "../../ui/Input";
 import Badges from "../../ui/Badge";
 import { dangKyDeTai } from "../../API/sinhVien/DeTai";
 import Loading from "../Loading";
@@ -92,10 +90,6 @@ const BackContainer = styled.div`
           ${rotateAndTranslate} 0.6s ease forwards
         `};
 `;
-const DeTaiListContaienr = styled.div`
-  width: 100%;
-  padding: 0 1.6rem;
-`;
 const DeTaiList = styled.div`
   display: flex;
   flex-direction: column;
@@ -131,7 +125,7 @@ const TagList = styled.div`
 const HiddentElement = styled.div`
   overflow: hidden;
   transition: max-height 0.5s ease-in-out;
-  max-height: ${({ maxHeight }) => maxHeight};
+  max-height: ${({ maxheight }) => maxheight};
 `;
 const FullScreenDiv = styled.div`
   position: fixed;
@@ -143,74 +137,14 @@ const FullScreenDiv = styled.div`
   z-index: 100;
 `;
 const ButtonGroup = styled.div``;
-const FilterToggle = styled.span`
-  display: none;
-  @media screen and (max-width: 768px) {
-    & {
-      display: flex;
-      align-items: center;
-      background-color: var(--color--secondary_3);
-      width: 2rem;
-      height: 3.2rem;
-      cursor: pointer;
-      z-index: 11;
-    }
-  }
-`;
-function DanhSachDeTaiList({ danhSachDeTai, onClick }) {
-  const [searchDeTai, setSearchDeTai] = useState("");
-  const [deTaiDaLoc, setdeTaiDaLoc] = useState(danhSachDeTai);
 
-  useEffect(() => {
-    if (searchDeTai) {
-      setdeTaiDaLoc(
-        danhSachDeTai.filter((dt) =>
-          dt.tenDeTai.toLowerCase().includes(searchDeTai.toLowerCase())
-        )
-      );
-    } else {
-      setdeTaiDaLoc(danhSachDeTai);
-    }
-  }, [searchDeTai, danhSachDeTai]);
+function DanhSachDeTaiList({ danhSachDeTai }) {
   return (
-    <>
-      <DeTaiListContaienr className="flex flexColumn g-8 ">
-        <div className="flex flexCenter g-spaceBetween">
-          <P2>{danhSachDeTai.length} Đề tài</P2>
-          <div className="flex flexCenter g-8">
-            <form onSubmit={(e) => e.preventDefault()}>
-              <InputContainer full="none" type="inputGroup">
-                <span>
-                  <HiSearch />
-                </span>
-                <InputContainer.Input
-                  type="text"
-                  value={searchDeTai}
-                  onChange={(e) => setSearchDeTai(e.target.value)}
-                  placeholder="Nhập tên đề tài cần tìm"
-                  id={"timKiem"}
-                />
-              </InputContainer>
-            </form>
-            <FilterToggle onClick={onClick}>
-              <HiFilter />
-            </FilterToggle>
-          </div>
-        </div>
-        <DeTaiList>
-          {danhSachDeTai.length ? (
-            <DanhSachDoAnContainer danhSachDeTai={deTaiDaLoc} />
-          ) : (
-            <P2>Không có đề tài nào</P2>
-          )}
-        </DeTaiList>
-      </DeTaiListContaienr>
-    </>
-  );
-}
-function DanhSachDoAnContainer({ danhSachDeTai }) {
-  return danhSachDeTai.map(
-    (dt) => dt.soLuongDoAn < 2 && <ChiTietDeTai dt={dt} />
+    <DeTaiList>
+      {danhSachDeTai.map(
+        (dt) => dt.soLuongDoAn < 2 && <ChiTietDeTai dt={dt} key={dt.maDeTai} />
+      )}
+    </DeTaiList>
   );
 }
 
@@ -224,11 +158,7 @@ function ChiTietDeTai({ dt }) {
   const { data: thongTinNguoiDung } = useQuery({
     queryKey: ["thongTinTaiKhoan"],
   });
-  const {
-    mutate: dangKyMutate,
-    isLoading,
-    error,
-  } = useMutation({
+  const { mutate: dangKyMutate, isLoading } = useMutation({
     mutationFn: dangKyDeTai,
     onSuccess: () => {
       toast.success("Đăng ký đề tài thành công");
@@ -290,7 +220,7 @@ function ChiTietDeTai({ dt }) {
             <P2>
               Giảng viên hướng dẫn: <strong> {dt.tenGiangVien}</strong>
             </P2>
-            <HiddentElement ref={detailsRef} maxHeight={maxHeight}>
+            <HiddentElement ref={detailsRef} maxheight={maxHeight}>
               <P2>
                 <strong>Mô tả:</strong>
               </P2>

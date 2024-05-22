@@ -3,15 +3,15 @@ import { useQuery } from "@tanstack/react-query";
 import { layThongTin } from "../API/DangNhap";
 
 function UseThongTinTaiKhoan() {
-  const { taiKhoan, vaiTro } = JSON.parse(localStorage.getItem("user")) || {
-    taiKhoan: null,
-    vaiTro: null,
-  };
+  const item = localStorage.getItem("user");
+  const { taiKhoan, vaiTro } = JSON.parse(item) || {};
   const [queried, setQueried] = useState(false);
-
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["thongTinTaiKhoan"],
-    queryFn: () => layThongTin({ maTaiKhoan: taiKhoan, vaiTro }),
+    queryFn: () => {
+      console.log(taiKhoan, vaiTro);
+      return layThongTin({ maTaiKhoan: taiKhoan, vaiTro });
+    },
     retry: 2,
     staleTime: 0,
     enabled: !queried,

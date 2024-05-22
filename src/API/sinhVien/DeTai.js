@@ -117,3 +117,12 @@ export function capNhatAnhDaiDien(thongTinAnh) {
     body: thongTinAnh,
   });
 }
+
+//
+export function suaThongTinSinhVien(thongTinSinhVien) {
+  const url = `${BASE_URL}?resource=thongTinSinhVien`;
+  return fetchApi(url, {
+    method: "PUT",
+    body: JSON.stringify(thongTinSinhVien),
+  });
+}

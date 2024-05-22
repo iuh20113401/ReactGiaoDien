@@ -174,10 +174,10 @@ function SinhVienTrangChu() {
                 color="var(--color--secondary_8)"
                 className="bold textCenter"
               >
-                Nguyễn Tuấn Kiệt
+                {data.tenSinhVien}
               </P2>
               <P2 size="1.4" className=" textCenter">
-                20113401 / DHHTTT16C
+                {data.maSinhVien} / {data.lop}
               </P2>
             </InfoContainer>
           </TitleContainer>

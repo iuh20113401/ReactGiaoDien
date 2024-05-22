@@ -2,13 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { HiMenu } from "react-icons/hi";
 import { Button } from "../../ui/Button";
-import Cookies from "universal-cookie";
 import { NavLink } from "react-router-dom";
 import UseThongTinTaiKhoan from "../../hooks/UseThongTinTaiKhoan";
 import ToogleDarkMode from "../../components/GiangVien/MainHeader/ToogleDarkMode";
-import dangXuat from "../../hooks/useDangXuat";
 import useDangXuat from "../../hooks/useDangXuat";
-
+import logo from "../../../public/hinhanh/iuh_logo_2.png";
 const Container = styled.div`
   width: 95%;
   height: 6rem;
@@ -80,10 +78,7 @@ function MainHeader({ setActiveNav }) {
           <ToogleDarkMode />
           <AvatarBox>
             <Avatar>
-              <img
-                src={data.hinhAnh || "../public/hinhanh/avatar.png"}
-                alt="avatar"
-              />
+              <img src={data.hinhAnh || logo} alt="avatar" />
             </Avatar>
             <Dropdown>
               <div>
