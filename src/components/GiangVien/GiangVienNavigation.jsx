@@ -117,7 +117,7 @@ const Link = styled(NavLink)`
       var(--color--main_6),
       var(--color--main_5)
     );
-    color: var(--color--white);
+    color: var(--color--nav-text);
     opacity: 0.9;
   }
   & > span:nth-child(3) {

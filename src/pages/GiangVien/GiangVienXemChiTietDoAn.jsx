@@ -25,7 +25,7 @@ const QuanLyTitle = styled.div`
   width: 100%;
   height: 100%;
   padding: 1.6rem 2.4rem 0rem 2.4rem;
-  background-color: var(--color--main_3);
+  background-color: var(--color--main_4);
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -105,34 +105,29 @@ function GiangVienXemChiTietDoAn() {
                 <TitleMain>
                   <H5
                     size="1.4"
-                    color="var(--color--secondary_8)"
+                    color="var(--color--white)"
                     className="semibold"
                   >
                     {DoAn.tenDeTai}
                   </H5>
                 </TitleMain>
                 <TitleSubtitle>
-                  <P2 size="1.4" color="var(--color--secondary_8)">
+                  <P2 size="1.4" color="var(--color--white)">
                     Mã đồ án: <strong>{DoAn.maDoAn}</strong>
                   </P2>
-                  <P2 size="1.4" color="var(--color--secondary_8)">
+                  <P2 size="1.4" color="var(--color--white)">
                     Giảng viên hướng dẫn: <strong>{DoAn.giangVienHD}</strong>
                   </P2>
-                  <P2 size="1.4" color="var(--color--secondary_8)">
+                  <P2 size="1.4" color="var(--color--white)">
                     Ngày đăng ký:
                     <strong>{new Date().toLocaleDateString()}</strong>
                   </P2>
+
                   <Badges
                     shadow={true}
-                    color={"var(--color--secondary_1)"}
-                    bgcolor={"var(--color--main_6)"}
-                    label={"New"}
-                  />
-                  <Badges
-                    shadow={true}
-                    color={"var(--color--secondary_1)"}
+                    color="var(--color--whilte)"
                     bgcolor={"var(--color--red_7)"}
-                    label={"Chờ xác nhận"}
+                    label={"Đang thực hiện"}
                   />
                 </TitleSubtitle>
               </TitleRight>

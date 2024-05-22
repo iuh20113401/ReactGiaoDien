@@ -6,6 +6,9 @@ const GlobalStyles = createGlobalStyle`
         --color--heading: #57534e; // --color--secondary_8
         --color--white: #fff;
 
+        --color--input: #f5f5f4;
+        --color--input-text: #57534e;
+
         --color--secondary_1: #fafaf9;
         --color--secondary_2: #f5f5f4;
         --color--secondary_3: #e7e5e4;
@@ -31,21 +34,25 @@ const GlobalStyles = createGlobalStyle`
         --color--main_11:#172554;
     }
     &.dark-mode{
-      --color--bg:  #1e293b; // --color--secondary_4
+      --color--bg:  #18212f; // --color--secondary_4
         --color--heading: #fafaf9; // --color--secondary_8
-        --color--white: #94a3b8;
+        --color--white: #1e293b;
+
+        --color--input: #f5f5f4;
+        --color--input-text: #57534e;
+
 
         --color--secondary_1: #0c0a09;
-        --color--secondary_2: #1c1917;
-        --color--secondary_3: #292524;
-        --color--secondary_4: #44403c;
-        --color--secondary_5: #57534e;
-        --color--secondary_6: #78716c;
-        --color--secondary_7: #fafaf9;
-        --color--secondary_8: #d6d3d1;
-        --color--secondary_9: #e7e5e4;
-        --color--secondary_10: #f5f5f4;
-        --color--secondary_11: #fafaf9;
+        --color--secondary_2: #111827;
+        --color--secondary_3: #1f2937;
+        --color--secondary_4: #374151;
+        --color--secondary_5: #4b5563;
+        --color--secondary_6: #f3f4f6;
+        --color--secondary_7: #e5e7eb;
+        --color--secondary_8: #d1d5db;
+        --color--secondary_9: #e5e7eb;
+        --color--secondary_10:#f3f4f6;
+        --color--secondary_11:#f9fafb;
         
         --color--main_1:#eff6ff;
         --color--main_2:#dbeafe;
@@ -58,11 +65,13 @@ const GlobalStyles = createGlobalStyle`
         --color--main_9:#1e40af;
         --color--main_10:#1e3a8a;
         --color--main_11:#172554;
+      filter: grayscale(.05) brightness(.9);
     }
 
 
    
-
+    --btn--text: #f9fafb;
+    --color--nav-text: #f8f7fa;    
     --color--red_1: #fef2f2 ;
     --color--red_2: #fee2e2 ;
     --color--red_3: #fecaca;

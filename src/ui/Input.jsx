@@ -105,7 +105,7 @@ const InputStyled = css`
   border: 1px solid var(--color--secondary_4);
   outline: none;
   border-radius: 0.6rem;
-  color: var(--color--secondary_8);
+  color: var(--color--input-text);
   &:focus {
     border: 1px solid var(--color--main_7);
   }

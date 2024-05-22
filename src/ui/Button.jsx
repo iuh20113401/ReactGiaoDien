@@ -50,8 +50,8 @@ const buttonStyles = css`
   border-radius: ${({ round }) => (round ? "50rem" : "0.6rem")};
   outline: none;
   border: ${({ color }) => (color ? `1px solid ${color}` : "none")};
-  color: ${({ color }) => color || "var(--color--secondary_10)"};
   background-color: ${({ bgcolor }) => bgcolor || "var(--color--secondary_1)"};
+  color: var(--btn--text);
   box-shadow: ${({ shadow }) =>
     shadow !== "none" ? "0rem 0.5rem 1rem rgba(0, 0, 0, 0.1)" : "none"};
   transition: all 0.5s ease;
@@ -75,6 +75,7 @@ export const Button = styled.button`
 `;
 export const OutlineButton = styled.button`
   ${buttonStyles};
+  color: ${({ color }) => color || "var(--color--secondary_10)"};
 `;
 const IconDiv = styled.span`
   font-size: ${({ size = "2" }) => `${size}rem`};
