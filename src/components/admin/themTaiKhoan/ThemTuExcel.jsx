@@ -12,6 +12,8 @@ import {
   themSinhVien,
   themTaiKhoan,
 } from "../../../API/taiKhoan/TaiKhoan";
+import { BsFileExcel } from "react-icons/bs";
+import { NavLink } from "react-router-dom";
 
 function ThemTuExcel() {
   const [excelData, setExcelData] = useState(null);
@@ -72,7 +74,10 @@ function ThemTuExcel() {
               continue;
             }
             if (tieuDe[i] === "ngaySinh") {
-              const date = new Date(row[i])?.toLocaleDateString("vi-VN");
+              let formatDate = row[i].split("/");
+              formatDate =
+                formatDate[1] + "/" + formatDate[0] + "/" + formatDate[2];
+              const date = new Date(formatDate)?.toLocaleDateString("vi-VN");
               if (date === "Invalid Date") {
                 setError(`Ngày sinh hàng ${index + 1} không hợp lệ`);
               }
@@ -92,15 +97,16 @@ function ThemTuExcel() {
     reader.readAsArrayBuffer(file);
   }
   const handleClick = () => {
-    fileInputRef.current.click(); // Trigger the file input when the area is clicked
+    fileInputRef.current.click();
     fileInputRef.current.value = null;
     setError(false);
   };
   useEffect(() => {
-    if (error || excelData === null || excelData.length === 0) {
-      return;
-    }
     const kiemTraMaTaiKhoan = async () => {
+      if (error || excelData === null || excelData.length === 0) {
+        console.log(error);
+        return;
+      }
       try {
         const result = await kiemTraMaTaiKhoanTonTai({
           maTaiKhoan: excelData.map((item) => item.maTaiKhoan),
@@ -137,6 +143,11 @@ function ThemTuExcel() {
       >
         Nhập từ file excel
       </OutlineButton>
+      <NavLink to="https://iuhcongnghemoi.s3.ap-southeast-2.amazonaws.com/Sample.xlsx">
+        <OutlineButton color="var(--color--green_7)" size="lg" className="ml-2">
+          <BsFileExcel /> Tải mẫu file excel
+        </OutlineButton>
+      </NavLink>
       {error && (
         <P2 size="1.2" color="var(--color--red_7)" className="mt-2">
           {error}

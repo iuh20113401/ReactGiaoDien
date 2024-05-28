@@ -87,32 +87,36 @@ function ChiTietDeTai({ dt, setActive, refetch }) {
         >
           <HiEye />
         </Tooltip>
-        <Tooltip
-          size="sm"
-          icon={<HiEye />}
-          bgcolor="var(--color--green_7)"
-          color="var(--color--white)"
-          content="Sửa thông tin"
-          tcolor="true"
-          direction="top"
-          disabled={isPending}
-          onClick={handleSua}
-        >
-          <HiPencil />
-        </Tooltip>
-        <Tooltip
-          size="sm"
-          icon={<HiEye />}
-          bgcolor="var(--color--red_6)"
-          color="var(--color--white)"
-          content="Xóa"
-          tcolor="true"
-          direction="top"
-          onClick={() => xoaDeTaiHandler(dt.MaDeTai)}
-          disabled={isPending}
-        >
-          <HiTrash />
-        </Tooltip>
+        {(dt.TrangThai === "Chờ duyệt" || dt.TrangThai === "Không duyệt") && (
+          <>
+            <Tooltip
+              size="sm"
+              icon={<HiEye />}
+              bgcolor="var(--color--green_7)"
+              color="var(--color--white)"
+              content="Sửa thông tin"
+              tcolor="true"
+              direction="top"
+              disabled={isPending}
+              onClick={handleSua}
+            >
+              <HiPencil />
+            </Tooltip>
+            <Tooltip
+              size="sm"
+              icon={<HiEye />}
+              bgcolor="var(--color--red_6)"
+              color="var(--color--white)"
+              content="Xóa"
+              tcolor="true"
+              direction="top"
+              onClick={() => xoaDeTaiHandler(dt.MaDeTai)}
+              disabled={isPending}
+            >
+              <HiTrash />
+            </Tooltip>
+          </>
+        )}
       </Col>
     </Row>
   );

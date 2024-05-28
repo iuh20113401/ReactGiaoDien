@@ -74,7 +74,7 @@ function SinhVienNavigation() {
       </NavContent>
       <NavFooter variation="sinhVien">
         <AccountAvatar>
-          <Avatar src={data.hinhanh} />
+          <Avatar src={data.hinhanh || Logo} />
         </AccountAvatar>
         <NavLink to="taikhoan">
           <H6 className="heading heading--5">Nguyễn Tuấn Kiệt</H6>
@@ -82,13 +82,22 @@ function SinhVienNavigation() {
         <FooterMenu>
           <div>
             <NavLink to="trangChu">
-              <Button shadow="none" bgcolor="transparent">
+              <Button
+                color="var(--color--secondary_10)"
+                shadow="none"
+                bgcolor="transparent"
+              >
                 Xem thông tin tài khoản
               </Button>
             </NavLink>
           </div>
           <div>
-            <Button shadow="none" bgcolor="transparent" onClick={dangXuat}>
+            <Button
+              color="var(--color--secondary_10)"
+              shadow="none"
+              bgcolor="transparent"
+              onClick={dangXuat}
+            >
               Đăng xuất
             </Button>
           </div>

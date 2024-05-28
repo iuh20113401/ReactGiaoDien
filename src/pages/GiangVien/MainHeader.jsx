@@ -83,13 +83,18 @@ function MainHeader({ setActiveNav }) {
             <Dropdown>
               <div>
                 <NavLink to="thongtincanhan">
-                  <Button shadow="none" bgcolor="transparent">
+                  <Button
+                    color="var(--color--secondary_10)"
+                    shadow="none"
+                    bgcolor="transparent"
+                  >
                     Xem thông tin tài khoản
                   </Button>
                 </NavLink>
               </div>
               <div>
                 <Button
+                  color="var(--color--secondary_10)"
                   shadow="none"
                   bgcolor="transparent"
                   onClick={(e) => dangXuat(e)}

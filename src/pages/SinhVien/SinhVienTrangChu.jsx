@@ -15,7 +15,7 @@ import { Spinner } from "../../ui/Spinner";
 import UseThongTinTaiKhoan from "../../hooks/UseThongTinTaiKhoan";
 import LoiMoi from "../../components/SinhVien/TrangChu/LoiMoi";
 import { capNhatAnhDaiDien } from "../../API/sinhVien/DeTai";
-
+import Logo from "../../../public/hinhanh/iuh_logo_2.png";
 const TrangChuContainer = styled.section`
   display: flex;
   flex-direction: column;
@@ -146,7 +146,7 @@ function SinhVienTrangChu() {
           <TitleContainer>
             <Figure>
               <ImgBox>
-                <img src={`${data.hinhanh}`} alt="Avatar" />
+                <img src={`${data.hinhanh || Logo}`} alt="Avatar" />
               </ImgBox>
               <Button
                 size="sm"

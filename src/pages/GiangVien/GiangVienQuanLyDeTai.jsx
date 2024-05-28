@@ -15,6 +15,7 @@ import UseThongTinTaiKhoan from "../../hooks/UseThongTinTaiKhoan";
 import { DanhSachDeTaiContainer } from "../../components/GiangVien/QuanLyDeTaiComponent/DanhSachDeTaiContainer";
 import Loading from "../Loading";
 import Filter from "../../components/GiangVien/Filter/Filter";
+import { Danhsachdetai } from "../../components/GiangVien/RightContent/Danhsachdetai";
 
 const QuanLyDeTaiSection = styled.section`
   display: flex;
@@ -89,20 +90,20 @@ function GiangVienQuanLyDeTai() {
         return dt.TenDeTai.includes(searchValue);
       });
     const status = searchParam.get("trangthai");
-    const skills = searchParam.get("kynang")?.split("+").join(" ");
+    const dm = searchParam.get("danhmuc")?.split("+").join(" ");
     return data.filter((dt) => {
       return (
         (!status ||
           +status === 0 ||
           dt.TrangThai === TrangThai[status - 1]?.ten) &&
-        (!skills ||
-          skills === "" ||
-          dt.Tag.split(",")
-            .map((t) => t.trim())
-            .includes(skills))
+        (!dm || dm === "" || dt.TenDanhMuc === dm)
       );
     });
   }, [data, searchValue, searchParam]);
+  const danhMuc = data?.reduce((acc, dt) => {
+    if (acc.includes(dt.TenDanhMuc)) return acc;
+    return [...acc, dt.TenDanhMuc];
+  }, []);
   return (
     <>
       {isLoading && <Loading size={8.4} color="var(--color--main_7)" />}
@@ -142,12 +143,15 @@ function GiangVienQuanLyDeTai() {
                   </option>
                 ))}
               </Filter>
-              <Filter field={"kynang"}>
-                <option value="">Chọn theo kỹ năng yêu cầu</option>
-                <option value="HTML">HTML</option>
-                <option value="CSS">CSS</option>
-                <option value="Javascript">Javascript</option>
-                <option value="Phân tích yêu cầu">Phân tích yêu cầu</option>
+              <Filter field={"danhmuc"}>
+                <option value="">Chọn theo danh mục</option>
+                {danhMuc.map((dm, index) => {
+                  return (
+                    <option key={index} value={dm}>
+                      {dm}
+                    </option>
+                  );
+                })}
               </Filter>
             </InputContainer>
           </Container>
