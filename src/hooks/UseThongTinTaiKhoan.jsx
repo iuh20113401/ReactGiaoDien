@@ -4,7 +4,7 @@ import { layThongTin } from "../API/DangNhap";
 
 function UseThongTinTaiKhoan() {
   const item = localStorage.getItem("user");
-  const { taiKhoan, vaiTro } = JSON.parse(item) || {};
+  const { taiKhoan, vaiTro } = JSON.parse(item)?.user || {};
   const [queried, setQueried] = useState(false);
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["thongTinTaiKhoan"],

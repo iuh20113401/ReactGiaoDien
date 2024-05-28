@@ -143,7 +143,7 @@ const DropdownContainer = styled.ul`
 function GiangVienNavigation({ setActiveNav }) {
   const [isListVisible, setIsListVisible] = useState(false);
 
-  const { vaiTro } = JSON.parse(localStorage.getItem("user"));
+  const { vaiTro } = JSON.parse(localStorage.getItem("user"))?.user;
 
   return (
     <NavigationContainer>

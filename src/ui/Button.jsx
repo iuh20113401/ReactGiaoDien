@@ -51,7 +51,7 @@ const buttonStyles = css`
   outline: none;
   border: ${({ color }) => (color ? `1px solid ${color}` : "none")};
   background-color: ${({ bgcolor }) => bgcolor || "var(--color--secondary_1)"};
-  color: var(--btn--text);
+  color: ${({ color }) => color || "var(--btn--text)"};
   box-shadow: ${({ shadow }) =>
     shadow !== "none" ? "0rem 0.5rem 1rem rgba(0, 0, 0, 0.1)" : "none"};
   transition: all 0.5s ease;

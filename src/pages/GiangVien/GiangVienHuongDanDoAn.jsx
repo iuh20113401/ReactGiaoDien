@@ -75,7 +75,6 @@ function GiangVienHuongDanDoAn() {
       <H5>Hướng dẫn</H5>
       <Button
         bgcolor="var(--color--main_7)"
-        color="var(--color--secondary_1)"
         onClick={() => navigate("themhuongdan")}
       >
         Thêm hướng dẫn mới

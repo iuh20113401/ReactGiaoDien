@@ -112,7 +112,6 @@ function GiangVienQuanLyDeTai() {
           <ButtonThemContainer>
             <Button
               bgcolor="var(--color--main_7)"
-              color="var(--color--secondary_1)"
               size="lg"
               onClick={(e) => navigate("themdetai")}
             >

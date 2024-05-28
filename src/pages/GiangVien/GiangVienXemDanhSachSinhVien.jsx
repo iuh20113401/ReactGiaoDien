@@ -97,7 +97,6 @@ function GiangVienXemDanhSachSinhVien() {
       <XuatFileContainter>
         <Button
           bgcolor="var(--color--green_7)"
-          color="var(--color--secondary_1)"
           onClick={() => createExcel(data)}
         >
           <FaFileExcel /> Xuất file excel
@@ -140,11 +139,7 @@ function GiangVienXemDanhSachSinhVien() {
           </InputContainer.Select>
         </InputContainer>
         <div>
-          <Button
-            bgcolor="var(--color--main_7)"
-            color="var(--color--secondary_1)"
-            size="lg"
-          >
+          <Button bgcolor="var(--color--main_7)" size="lg">
             Tìm kiếm
           </Button>
         </div>

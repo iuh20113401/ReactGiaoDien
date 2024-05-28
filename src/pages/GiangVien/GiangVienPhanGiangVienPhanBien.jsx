@@ -99,7 +99,6 @@ export function GiangVienPhanGiangVienPhanBien() {
             <div>
               <Button
                 bgcolor="var(--color--main_7)"
-                color="var(--color--secondary_1)"
                 size="lg"
               >
                 Tìm kiếm

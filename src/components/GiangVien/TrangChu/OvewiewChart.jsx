@@ -5,6 +5,8 @@ import { HiCheckCircle, HiXCircle } from "react-icons/hi";
 import { P2 } from "../../../ui/Typography";
 import CreateProgressBar from "../../../ui/ProgressBar";
 import Logo from "../../../../public/hinhanh/iuh_logo_2.png";
+import useThongTinThongKe from "./useThongTinThongKe";
+import Example from "../Chart/SimpleLineChart";
 const OverviewContainer = styled.div`
   height: auto;
   display: grid;
@@ -84,6 +86,8 @@ const CompareRule = styled.div`
   }
 `;
 function OvewiewChart() {
+  const { thongTinThongKe: data } = useThongTinThongKe();
+
   return (
     <OverviewContainer className="w-100">
       <LargeContainer>
@@ -100,20 +104,20 @@ function OvewiewChart() {
           </P2>
           <TongQuanContainer className="mt-3">
             <P2 size="1.4" color="var(--color--secondary_1)">
-              <span>200</span>
+              <span>{data.thongKeDeTaiTheoTrangThai?.soLuongDeTai}</span>
               Đề tài
             </P2>
             <P2 size="1.4" color="var(--color--secondary_1)">
-              <span>200</span>
+              <span>{data.thongKeDoAN?.soLuongDoAn}</span>
               Đồ án
             </P2>
             <P2 size="1.4" color="var(--color--secondary_1)">
-              <span>200</span>
-              Giảng viên
+              <span>{data.thongKeSinhVien?.length}</span>
+              Sinh viên
             </P2>
             <P2 size="1.4" color="var(--color--secondary_1)">
-              <span>200</span>
-              Sinh viên
+              <span>{data.thongKeDeTaiTheoDanhMuc?.length}</span>
+              Danh mục
             </P2>
           </TongQuanContainer>
         </LargeContainerRight>
@@ -126,7 +130,7 @@ function OvewiewChart() {
             Tổng số đồ án
           </P2>
           <P2 size="2" className="semibold">
-            200
+            {data.thongKeDoAN?.soLuongDoAn}
           </P2>
         </div>
         <CompareContainer className="flex g-spaceBetween">
@@ -136,9 +140,12 @@ function OvewiewChart() {
               Đã duyệt
             </P2>
             <P2 size="1.8" className="mt-2 bold">
-              62.2%{" "}
+              {(+data.thongKeDoAN?.SoLuongTrangThai1 /
+                +data.thongKeDoAN?.soLuongDoAn) *
+                100}
+              %
             </P2>
-            <P2 size="1.6">1600</P2>
+            <P2 size="1.6">{data.thongKeDoAN?.SoLuongTrangThai1}</P2>
           </CompareDiv>
           <CompareRule></CompareRule>
           <CompareDiv align="flex-end">
@@ -147,23 +154,28 @@ function OvewiewChart() {
               Chưa duyệt
             </P2>
             <P2 size="1.8" className="mt-2 bold">
-              62.2%{" "}
+              {(+data.thongKeDoAN?.SoLuongTrangThai0 /
+                +data.thongKeDoAN?.soLuongDoAn) *
+                100}
+              %{" "}
             </P2>
-            <P2 size="1.6">1600</P2>
+            <P2 size="1.6">{data.thongKeDoAN?.SoLuongTrangThai0}</P2>
           </CompareDiv>
         </CompareContainer>
         <CreateProgressBar
           className="mt-1"
           size={1.6}
           color={"var(--color--green_7)"}
-          percent={"62.2"}
+          percent={`${
+            (+data.thongKeDoAN?.SoLuongTrangThai1 /
+              +data.thongKeDoAN?.soLuongDoAn) *
+            100
+          }`}
           label={"true"}
         />
       </div>
       <div>
-        <P2>Điểm số trung bình</P2>
-        <P2>Điểm cao nhất </P2>
-        <P2>Điểm thấp nhất </P2>
+        <Example />
       </div>
     </OverviewContainer>
   );

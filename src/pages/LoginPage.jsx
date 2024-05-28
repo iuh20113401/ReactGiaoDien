@@ -57,8 +57,8 @@ function LoginPage() {
       if (vaiTro > 0) navigate("/giangVien");
     }
 
-    if (user?.taiKhoan) {
-      navigateToHome(user.vaiTro);
+    if (user?.user.taiKhoan) {
+      navigateToHome(user.user.vaiTro);
     }
   }, [navigate, user]);
   const {
@@ -77,7 +77,10 @@ function LoginPage() {
         token: data.token,
         expire: new Date().getTime() + timeOption.maxAge * 1000,
       });
-      setUser({ taiKhoan: data.MaTaiKhoan, vaiTro: data.VaiTro });
+      setUser({
+        user: { taiKhoan: data.MaTaiKhoan, vaiTro: data.VaiTro },
+        expire: new Date().getTime() + timeOption.maxAge * 1000,
+      });
       toast.success("Đăng nhập thành công");
     },
     onError: (error) => {

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useCallback, useMemo, useState } from "react";
+import {  useMemo, useState } from "react";
 import { HiSearch } from "react-icons/hi";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
@@ -123,7 +123,6 @@ function GiangVienDuyetDeTai() {
             <div>
               <Button
                 bgcolor="var(--color--main_7)"
-                color="var(--color--secondary_1)"
                 size="lg"
               >
                 Tìm kiếm

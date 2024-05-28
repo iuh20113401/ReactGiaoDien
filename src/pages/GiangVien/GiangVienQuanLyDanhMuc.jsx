@@ -30,9 +30,7 @@ function GiangVienQuanLyDanhMuc() {
   return (
     <QuanLyDanhMucContainer>
       <H5>Quản lý danh mục đề tài</H5>
-      <Button bgcolor="var(--color--main_7)" color="var(--color--secondary_1)">
-        Thêm danh mục mới
-      </Button>
+      <Button bgcolor="var(--color--main_7)">Thêm danh mục mới</Button>
       <Container>
         <Table>
           <TieuDe>

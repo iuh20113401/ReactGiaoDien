@@ -8,6 +8,7 @@ import DeTaiSection from "../../components/GiangVien/TrangChu/DeTaiSection";
 import { thongKeDeTai } from "../../API/giangVien/DeTai";
 import UseThongTinTaiKhoan from "../../hooks/UseThongTinTaiKhoan";
 import Loading from "../Loading";
+import DoAnSection from "../../components/GiangVien/TrangChu/DoAnSection";
 const TrangChuContainer = styled.section`
   display: flex;
   flex-direction: column;
@@ -16,7 +17,7 @@ const TrangChuContainer = styled.section`
 
 function GiangVienTrangChu() {
   const { data: thongTinNguoiDung } = UseThongTinTaiKhoan();
-  const { data: thongTinThongKe, isLoading } = useQuery({
+  const { isLoading } = useQuery({
     queryKey: ["thongKeDeTai"],
     queryFn: () => thongKeDeTai({ maGiangVien: thongTinNguoiDung.maGiangVien }),
   });
@@ -26,8 +27,9 @@ function GiangVienTrangChu() {
       {isLoading && <Loading size={8.4} color="var(--color--main_7)" />}
       {!isLoading && (
         <>
-          <OverviewChart thongKeThongKe={thongTinThongKe} />
-          <DeTaiSection thongKeThongKe={thongTinThongKe} />
+          <OverviewChart />
+          <DeTaiSection />
+          <DoAnSection />
         </>
       )}
     </TrangChuContainer>

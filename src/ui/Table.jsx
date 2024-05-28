@@ -1,8 +1,9 @@
 import React from "react";
 import styled, { css } from "styled-components";
+
 const TableContainer = styled.div`
   grid-template-columns: repeat(12, minmax(calc(100% / 12), 1fr));
-  width: 100%;
+  width: ${({ customwidth }) => (customwidth ? `${customwidth}%` : "100%")};
   border-collapse: collapse;
   display: grid;
   row-gap: ${({ gap }) => (gap ? `${gap}rem` : "0.8rem")};
@@ -140,9 +141,9 @@ export const Col6 = styled.div`
   word-break: break-word;
 `;
 
-function Table({ children, border = "false", gap }) {
+function Table({ children, border = "false", gap, ...props }) {
   return (
-    <TableContainer border={border} gap={gap}>
+    <TableContainer border={border} gap={gap} {...props}>
       {children}
     </TableContainer>
   );

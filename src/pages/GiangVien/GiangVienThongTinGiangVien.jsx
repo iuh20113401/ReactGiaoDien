@@ -156,7 +156,6 @@ const GiangVienThongTinGiangVien = () => {
               <Button
                 size="sm"
                 shadow="none"
-                bgcolor="var(--color--secondary_3)"
                 onClick={() => inputHinhAnh.current.click()}
               >
                 <form>
