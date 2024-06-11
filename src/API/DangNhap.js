@@ -1,4 +1,4 @@
-const BASE_URL = "http://54.206.33.181/server/api/dangNhap.php";
+const BASE_URL = "https://54.206.33.181/server/api/dangNhap.php";
 export async function dangNhap({ taiKhoan, matKhau, thoiGian }) {
   try {
     const response = await fetch(BASE_URL + "?action=dangNhap", {

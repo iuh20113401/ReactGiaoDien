@@ -1,4 +1,4 @@
-const URL = "http://54.206.33.181/server/api/";
+const URL = "https://54.206.33.181/server/api/";
 export default async function fetchApi(url, options) {
   const token = JSON.parse(localStorage.getItem("token"))?.token || "";
   options.headers = {
