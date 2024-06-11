@@ -1,4 +1,4 @@
-const BASE_URL = "https://54.206.33.181/server/api/chatApp/chatApp.php?";
+const BASE_URL = "https://54.206.33.181/server/api/chatApp/chatApp.php";
 export async function layDanhSachLienLac(maSinhVien) {
   try {
     const response = await fetch(

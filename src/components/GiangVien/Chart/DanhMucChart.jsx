@@ -18,7 +18,6 @@ const renderActiveShape = (props) => {
     percent,
     value,
   } = props;
-  console.log(props);
   const sin = Math.sin(-RADIAN * midAngle);
   const cos = Math.cos(-RADIAN * midAngle);
   const sx = cx + (outerRadius + 10) * cos;

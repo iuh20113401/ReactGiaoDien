@@ -5,7 +5,7 @@ import useThongTinThongKe from "../TrangChu/useThongTinThongKe";
 export default function DoAnChart() {
   const { thongTinThongKe: data } = useThongTinThongKe();
   const TienDoData = data.thongKeTienDo;
-  const data01 = TienDoData.reduce(
+  const data01 = TienDoData?.reduce(
     (acc, item) => {
       if (+item.trangThai === 0) {
         acc[0].value += 1;

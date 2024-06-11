@@ -42,7 +42,7 @@ function DanhSachDoAnContainer({ DanhSachDoAn, setActive, refetch }) {
           </P2>
         </Col2>
       </TieuDe>
-      {DanhSachDoAn.map((da, index) => {
+      {DanhSachDoAn?.map((da, index) => {
         return <ChiTietDoAn da={da} index={index + 1} key={da.maDeTai} />;
       })}
     </Table>

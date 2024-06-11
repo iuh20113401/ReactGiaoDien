@@ -9,7 +9,6 @@ function UseThongTinTaiKhoan() {
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["thongTinTaiKhoan"],
     queryFn: () => {
-      console.log(taiKhoan, vaiTro);
       return layThongTin({ maTaiKhoan: taiKhoan, vaiTro });
     },
     retry: 2,

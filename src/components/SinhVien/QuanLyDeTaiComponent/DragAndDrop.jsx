@@ -79,10 +79,12 @@ export function DragAndDrop({ maDoAn, refetch }) {
     copy[file.name] = { state: "pending", percentage: 0 };
     setUploadProgress(copy);
     try {
+      const token = JSON.parse(localStorage.getItem("token"))?.token || "";
       const response = await fetch(
-        "http://localhost/server/api/sinhvien/detai.php?resource=themTaiLieu",
+        "https://54.206.33.181/server/api/sinhvien/detai.php?resource=themTaiLieu",
         {
           method: "POST",
+          headers: { Authorization: `${token}` },
           body: formData,
         }
       );

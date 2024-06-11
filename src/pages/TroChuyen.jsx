@@ -151,7 +151,8 @@ const ChatApp = () => {
 
   const danhSachLienLac = useMemo(() => {
     if (isError) return null;
-    return isLoading ? null : data.filter((d) => d.ma !== null);
+    console.log(data);
+    return isLoading ? null : data?.filter((d) => d.ma !== null);
   }, [isError, isLoading, data]);
   const [nguoiNhan, setNguoiNhan] = useState(null);
 
