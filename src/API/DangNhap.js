@@ -1,15 +1,13 @@
+const BASE_URL = "http://54.206.33.181/server/api/dangNhap.php";
 export async function dangNhap({ taiKhoan, matKhau, thoiGian }) {
   try {
-    const response = await fetch(
-      "https://54.206.45.242/server-main/api/dangNhap.php?action=dangNhap",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ taiKhoan, matKhau, thoiGian }),
-      }
-    );
+    const response = await fetch(BASE_URL + "?action=dangNhap", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ taiKhoan, matKhau, thoiGian }),
+    });
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -24,17 +22,14 @@ export async function dangNhap({ taiKhoan, matKhau, thoiGian }) {
 }
 export async function layThongTin(thongTin) {
   const { token } = JSON.parse(localStorage.getItem("token"));
-  const response = await fetch(
-    "https://54.206.45.242/server-main/api/dangNhap.php?action=layThongTin",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-      body: JSON.stringify(thongTin),
-    }
-  );
+  const response = await fetch(BASE_URL + "?action=layThongTin", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+    body: JSON.stringify(thongTin),
+  });
   if (response.status === 401) {
     throw new Error("Access is denied");
   }

@@ -1,3 +1,4 @@
+const URL = "http://54.206.33.181/server/api/";
 export default async function fetchApi(url, options) {
   const token = JSON.parse(localStorage.getItem("token"))?.token || "";
   options.headers = {
@@ -5,7 +6,7 @@ export default async function fetchApi(url, options) {
     Authorization: `${token}`,
   };
   try {
-    const response = await fetch(url, options);
+    const response = await fetch(URL + url, options);
     const data = await response.json();
     if (response.status === 409) {
       throw new Error(data || " có lỗi xuất hiện");

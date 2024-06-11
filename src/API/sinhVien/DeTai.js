@@ -1,6 +1,6 @@
 // Base configuration for fetch requests
 import fetchApi from "../FetchApi.js";
-const BASE_URL = "https://54.206.45.242/server-main/api/sinhVien/deTai.php";
+const BASE_URL = "sinhVien/deTai.php";
 
 // Exported functions using the fetchData utility
 export function layDanhSachDeTai() {
