@@ -1,9 +1,15 @@
 const URL = "https://54.206.33.181/server/api/";
 export default async function fetchApi(url, options) {
-  const token = JSON.parse(localStorage.getItem("token"))?.token || "";
+  const token = JSON.parse(localStorage.getItem("token")) || "";
+  const date = new Date().getTime();
+  if (!token || token?.expire < date) {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.reload();
+  }
   options.headers = {
     ...options.headers,
-    Authorization: `${token}`,
+    Authorization: `${token.token}`,
   };
   try {
     const response = await fetch(URL + url, options);

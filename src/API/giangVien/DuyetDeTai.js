@@ -1,10 +1,10 @@
-import fetchApi from "../FetchApi.js";
+import FetchApi from "../FetchApi.js";
 
 const BASE_URL = "api/giangVien";
 
 export function layDanhSachDeTaiChoDuyet() {
   const url = `${BASE_URL}/duyetDeTai.php?resource=deTaiChoDuyet`;
-  return fetchApi(url, { method: "GET" });
+  return FetchApi(url, { method: "GET" });
 }
 
 export function duyetDeTai(deTai) {
@@ -14,7 +14,7 @@ export function duyetDeTai(deTai) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(deTai),
   };
-  return fetchApi(url, options);
+  return FetchApi(url, options);
 }
 
 export function khongDuyetDeTai(deTai) {
@@ -24,7 +24,7 @@ export function khongDuyetDeTai(deTai) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(deTai),
   };
-  return fetchApi(url, options);
+  return FetchApi(url, options);
 }
 
 export function yeuCauChinhSuaDeTai(deTai) {
@@ -34,5 +34,5 @@ export function yeuCauChinhSuaDeTai(deTai) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(deTai),
   };
-  return fetchApi(url, options);
+  return FetchApi(url, options);
 }

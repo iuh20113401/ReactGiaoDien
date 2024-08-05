@@ -1,4 +1,4 @@
-import fetchApi from "../FetchApi.js";
+import FetchApi from "../FetchApi.js";
 
 const BASE_URL = "giangVien/doAn.php";
 
@@ -15,7 +15,7 @@ const callApi = async (
 
   const body = data ? JSON.stringify(data) : null;
 
-  return fetchApi(url, { method, body });
+  return FetchApi(url, { method, body });
 };
 
 export const layDanhSachDiemQuaTrinh = (maGiangVien) =>
