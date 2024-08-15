@@ -6,7 +6,7 @@ function getLocaoStorageValue(key, initialValue) {
   }
   const item = JSON.parse(jsonValue);
   const date = new Date().getTime();
-  if (item && item?.expire && item?.expires < date) {
+  if (item && item?.expire && item?.expire < date) {
     localStorage.removeItem(key);
     return initialValue;
   }

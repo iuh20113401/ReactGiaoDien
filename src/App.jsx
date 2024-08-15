@@ -95,6 +95,15 @@ function AutoLoginRedirect() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
+      const date = new Date().getTime();
+      console.log(user, user?.expire && user?.expire < date);
+
+      if (user?.expire && user?.expire < date) {
+        console.log(user, user?.expire && user?.expire < date);
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        navigate("/login");
+      }
       if (user && user?.vaiTro !== undefined) {
         const targetPath = determineTargetPath(user?.vaiTro);
         if (location.pathname !== targetPath) {

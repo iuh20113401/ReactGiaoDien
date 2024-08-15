@@ -39,6 +39,15 @@ function FormThemTaiKhoan() {
   });
 
   function onSubmit(data) {
+    data = {
+      ngaySinh: data.ngaySinh,
+      gioiTinh: data.gioiTinh,
+      maTaiKhoan: data.maTaiKhoan,
+      hoTen: data.hoTen,
+      email: data.email,
+      soDienThoai: data.soDienThoai,
+      lop: data.lop,
+    };
     mutate(data);
   }
   return (
@@ -140,7 +149,6 @@ function FormThemTaiKhoan() {
           Xóa toàn bộ ô nhập
         </OutlineButton>
         <Button
-          type="submit"
           bgcolor="var(--color--main_7)"
           color="var(--color--secondary_1)"
           disabled={isLoading}
