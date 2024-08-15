@@ -140,7 +140,7 @@ function ChiTietSinhVien({ sv, refetch, index }) {
             </InputContainer>
           </form>
         ) : (
-          <Button size="sm" onClick={() => setIsDiemCuoiKy("")}>
+          <Button size="sm" color="black" onClick={() => setIsDiemCuoiKy("")}>
             <HiPencil />
           </Button>
         )}

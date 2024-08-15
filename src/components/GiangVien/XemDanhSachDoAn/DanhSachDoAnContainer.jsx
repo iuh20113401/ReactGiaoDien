@@ -22,7 +22,7 @@ export function DanhSachDoAnContainer({ DanhSachDoAn }) {
     return (
       <DoAnContainer>
         <DoAnLeft>
-          <img src={da.hinhanh || { Logo }} alt="Hình ảnh đề tài" />
+          <img src={da.hinhanh || Logo} alt="Hình ảnh đề tài" />
         </DoAnLeft>
         <DoAnRight>
           <P2 size="1.6" className="bold">
