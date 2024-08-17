@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 const TableContainer = styled.div`
   grid-template-columns: repeat(12, minmax(calc(100% / 12), 1fr));
-  width: ${({ customwidth }) => (customwidth ? `${customwidth}%` : "100%")};
+  width: ${({ customwidth }) => (customwidth ? `${customwidth}rem` : "100%")};
   border-collapse: collapse;
   display: grid;
   row-gap: ${({ gap }) => (gap ? `${gap}rem` : "0.8rem")};
@@ -33,7 +33,6 @@ export const Row = styled.div`
   }
   & > div {
     border-collapse: collapse;
-
     padding: 0.8rem 0.8rem 0.8rem 1.6rem;
     background-color: ${({ bgColor }) =>
       bgColor === null ? "#fff" : `${bgColor}`};
@@ -45,8 +44,8 @@ export const Row = styled.div`
       return border === "false"
         ? ""
         : css`
-            border-top: 1px solid black;
-            border-bottom: 1px solid black;
+            border-top: 1px solid var(--color--secondary_6);
+            border-bottom: 1px solid var(--color--secondary_6);
           `;
     }}
   }
@@ -56,7 +55,7 @@ export const Row = styled.div`
       return border === "false"
         ? ""
         : css`
-            border-left: 1px solid black;
+            border-left: 1px solid var(--color--secondary_6);
           `;
     }}
   }
@@ -65,7 +64,7 @@ export const Row = styled.div`
       return border === "false"
         ? ""
         : css`
-            border-right: 1px solid black;
+            border-right: 1px solid var(--color--secondary_6);
           `;
     }}
   }
@@ -90,8 +89,8 @@ export const TieuDe = styled.div`
       return border === "false"
         ? ""
         : css`
-            border-top: 1px solid black;
-            border-bottom: 1px solid black;
+            border-top: 1px solid var(--color--secondary_6);
+            border-bottom: 1px solid var(--color--secondary_6);
           `;
     }}
   }
@@ -101,7 +100,7 @@ export const TieuDe = styled.div`
       return border === "false"
         ? ""
         : css`
-            border-left: 1px solid black;
+            border-left: 1px solid var(--color--secondary_6);
           `;
     }}
   }
@@ -110,7 +109,7 @@ export const TieuDe = styled.div`
       return border === "false"
         ? ""
         : css`
-            border-right: 1px solid black;
+            border-right: 1px solid var(--color--secondary_6);
           `;
     }}
   }

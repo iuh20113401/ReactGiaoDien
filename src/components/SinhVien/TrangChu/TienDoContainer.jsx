@@ -5,7 +5,7 @@ import { P2 } from "../../../ui/Typography";
 import CreateProgressBar from "../../../ui/ProgressBar";
 import { layHuongDanTheoSinhVien } from "../../../API/sinhVien/DeTai";
 export function TienDoContainer() {
-  const { data, isLoading } = useQuery({
+  let { data, isLoading } = useQuery({
     queryKey: ["huongdan"],
     queryFn: () => layHuongDanTheoSinhVien({ maSinhVien: "20113401" }),
     onError: () => {

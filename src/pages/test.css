@@ -1,0 +1,107 @@
+.docx-wrapper {
+  background: gray;
+  padding: 30px;
+  padding-bottom: 0px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+.docx-wrapper > section.docx {
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  margin-bottom: 30px;
+}
+.docx {
+  color: black;
+}
+section.docx {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
+  overflow: hidden;
+}
+section.docx > article {
+  margin-bottom: auto;
+}
+.docx table {
+  border-collapse: collapse;
+}
+.docx table td,
+.docx table th {
+  vertical-align: top;
+}
+.docx p {
+  margin: 0pt;
+  min-height: 1em;
+}
+.docx span {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+}
+.docx a {
+  color: inherit;
+  text-decoration: inherit;
+}
+.docx {
+  --docx-majorHAnsi-font: Calibri Light;
+  --docx-minorHAnsi-font: Calibri;
+  --docx-dk1-color: #000000;
+  --docx-lt1-color: #ffffff;
+  --docx-dk2-color: #44546a;
+  --docx-lt2-color: #e7e6e6;
+  --docx-accent1-color: #5b9bd5;
+  --docx-accent2-color: #ed7d31;
+  --docx-accent3-color: #a5a5a5;
+  --docx-accent4-color: #ffc000;
+  --docx-accent5-color: #4472c4;
+  --docx-accent6-color: #70ad47;
+  --docx-hlink-color: #0563c1;
+  --docx-folHlink-color: #954f72;
+}
+.docx span {
+  font-family: var(--docx-minorHAnsi-font);
+  min-height: 11pt;
+  font-size: 11pt;
+}
+.docx p {
+  margin-bottom: 8pt;
+  line-height: 1.08;
+}
+.docx table,
+table.docx_tablenormal td {
+  padding-top: 0pt;
+  padding-left: 5.4pt;
+  padding-bottom: 0pt;
+  padding-right: 5.4pt;
+}
+table.docx_tablegrid p {
+  margin-bottom: 0pt;
+  line-height: 1;
+}
+table.docx_tablegrid td {
+  border-top: 0.5pt solid black;
+  border-left: 0.5pt solid black;
+  border-bottom: 0.5pt solid black;
+  border-right: 0.5pt solid black;
+  padding-top: 0pt;
+  padding-left: 5.4pt;
+  padding-bottom: 0pt;
+  padding-right: 5.4pt;
+}
+p.docx_header {
+  margin-bottom: 0pt;
+  line-height: 1;
+}
+span.docx_headerchar p {
+  margin-bottom: 0pt;
+  line-height: 1;
+}
+p.docx_footer {
+  margin-bottom: 0pt;
+  line-height: 1;
+}
+span.docx_footerchar p {
+  margin-bottom: 0pt;
+  line-height: 1;
+}

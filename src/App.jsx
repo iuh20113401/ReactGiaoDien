@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   BrowserRouter as Router,
@@ -10,8 +10,8 @@ import {
 } from "react-router-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
-import Cookies from "universal-cookie";
 import { DarkModeProvider } from "./contexts/DarkModeContext.jsx";
+import TestHTML from "./pages/test";
 
 const Loading = React.lazy(() => import("./pages/Loading.jsx"));
 const LoginPage = React.lazy(() => import("./pages/LoginPage.jsx"));
@@ -80,7 +80,6 @@ const ThemTaiKhoan = React.lazy(() => import("./pages/admin/ThemTaiKhoan"));
 const GiangVienThongTinGiangVien = React.lazy(() =>
   import("./pages/GiangVien/GiangVienThongTinGiangVien")
 );
-
 const queryClient = new QueryClient({
   defaultOption: {
     queries: {
@@ -96,7 +95,13 @@ function AutoLoginRedirect() {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
       const date = new Date().getTime();
-      console.log(user, user?.expire && user?.expire < date);
+      console.log(
+        user,
+        user?.expire && user?.expire < date,
+        user?.expire < date,
+        user?.expire,
+        date
+      );
 
       if (user?.expire && user?.expire < date) {
         console.log(user, user?.expire && user?.expire < date);
@@ -104,7 +109,7 @@ function AutoLoginRedirect() {
         localStorage.removeItem("token");
         navigate("/login");
       }
-      if (user && user?.vaiTro !== undefined) {
+      if (user && user?.user.vaiTro !== undefined) {
         const targetPath = determineTargetPath(user?.vaiTro);
         if (location.pathname !== targetPath) {
           navigate(targetPath);
@@ -143,6 +148,7 @@ function App() {
             <Routes>
               <Route path="/" element={<AutoLoginRedirect />} />
               <Route path="login" element={<LoginPage />} />
+              <Route path="test" element={<TestHTML />} />
               <Route path="sinhvien" element={<SinhVienLayout />}>
                 <Route
                   path="*"
